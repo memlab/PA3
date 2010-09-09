@@ -198,8 +198,13 @@ def stimOnOff(t, config):
         flashStimulus(Text("Background stim #" + str(i)), duration=config.CYCLE_PULSE_ON_DURATION + config.CYCLE_PULSE_OFF_DURATION)
 
 def sync(t, config):
+    t.log.logMessage("START_SYNC_STIMS_AFTER " + str(timing.now()))
     for i in range(config.SYNC_DURATION_SECONDS):
-        flashStimulus(Text(str(config.SYNC_DURATION_SECONDS - i)), duration=1000)
+        t.pulseControl.pulseLen = (1000 / config.STIM_PULSE_FREQ) / 2
+        t.pulseControl.maxPulses = 1
+        t.pulseControl.startPulses(t.clk)
+
+        flashStimulus(Text(str(config.SYNC_DURATION_SECONDS - i)), duration=1000, jitter=config.JITTER)
 
 
 
