@@ -130,7 +130,7 @@ def runTrial(t, exp, config, stimTrial, state):
         t.clk.delay(config.INTER_STUDY_DURATION, jitter=config.JITTER)
         if stimTrial:
             if ((i % 2 == 1) and stimOdds) or ((i % 2 == 0) and (stimOdds == False)):
-                t.log.logMessage("START_STIM_AFTER " + str(timing.now()))
+                t.log.logMessage("START_STUDY_STIM_AFTER " + str(timing.now()))
                 t.pulseControl.pulseLen = (1000 / config.STIM_PULSE_FREQ) / 2
                 t.pulseControl.maxPulses = ((config.STUDY_PRESENTATION_DURATION + config.INTER_STUDY_DURATION) / t.pulseControl.pulseLen) / 2
                 t.pulseControl.startPulses(t.clk)
@@ -162,6 +162,15 @@ def runTrial(t, exp, config, stimTrial, state):
         t.vid.updateScreen(t.clk)
         #log the presentation of the probe
         t.log.logMessage("TEST_PROBE_%s\tTRIAL%d" % (cue, state.trial), t.clk)
+
+        #stim
+        if stimTrial:
+            if ((i % 2 == 1) and stimOdds) or ((i % 2 == 0) and (stimOdds == False)):
+                t.log.logMessage("START_CUE_STIM_AFTER " + str(timing.now()))
+                t.pulseControl.pulseLen = (1000 / config.STIM_PULSE_FREQ) / 2
+                t.pulseControl.maxPulses = (config.CUE_PRESENTATION_DURATION / t.pulseControl.pulseLen) / 2
+                t.pulseControl.startPulses(t.clk)
+
 
         #record
         fname = "%d_%s" % (state.trial, cue)
