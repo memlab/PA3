@@ -29,8 +29,8 @@ class PulseThread:
         self.EEGTrack = eeg
         self.config = config
         self.lastPulse = timing.now()
-        self.pulseLen = 1000 / freq
-        self.maxPulses = duration / self.pulseLen
+        self.pulseLen = (1000 / freq) / 2
+        self.maxPulses = (duration / self.pulseLen) / 2
         self.pulseCount = 0
         addPollCallback(self.EEGpulseCallback)
 
