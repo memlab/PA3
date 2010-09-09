@@ -13,10 +13,10 @@ class Tracks:
         self.key = KeyTrack("keyboard")
         self.log = LogTrack("session")
         self.clk = PresentationClock()
-        self.cycleEeg = EEGTrack("eeg", autoStart=False)
-        self.cycleEeg.startService()
-        self.cycleEeg.logall = True
-        self.cyclePulseControl = PulseThread(self.cycleEeg, config, config.STIM_PULSE_FREQ, config.CYCLE_PULSE_ON_DURATION)
+        self.eeg = EEGTrack("eeg", autoStart=False)
+        self.eeg.startService()
+        self.eeg.logall = True
+        self.pulseControl = PulseThread(self.eeg, config)
 
 
 class PulseThread:
@@ -24,13 +24,11 @@ class PulseThread:
     Finer control of pulse timing.
     """
     
-    def __init__(self, eeg, config, freq, duration):
+    def __init__(self, eeg, config):
         self.sendPulse = False
         self.EEGTrack = eeg
         self.config = config
         self.lastPulse = timing.now()
-        self.pulseLen = (1000 / freq) / 2
-        self.maxPulses = (duration / self.pulseLen) / 2
         self.pulseCount = 0
         addPollCallback(self.EEGpulseCallback)
 
@@ -55,7 +53,7 @@ class PulseThread:
         """
         Callback to manage sending pulses.
         """
-        if timing.now() >= self.lastPulse + self.pulseLen and self.sendPulse == True:
+        if self.sendPulse == True and (timing.now() >= self.lastPulse + self.pulseLen):
             timeInterval = self.EEGTrack.timedPulse(self.pulseLen)
             self.lastPulse = timeInterval[0]
             self.pulseCount += 1
@@ -113,6 +111,9 @@ def textInput(screenText, video, keyboard, clock):
 def runTrial(t, exp, config, stimTrial, state):
     t.vid.clear('black')
 
+    stimOdds = random.choice([True, False])
+    t.log.logMessage("STIM_ODDS " + str(stimOdds), t.clk)
+
     #STUDY
     #log the start of the study period
     t.log.logMessage("STUDY_START\tTRIAL_%d" % (state.trial), t.clk)
@@ -125,8 +126,12 @@ def runTrial(t, exp, config, stimTrial, state):
     t.log.logMessage("STUDY_ORIENT\tTRIAL_%d" % (state.trial), stamp)
 
     pairs = state.trialData[0][state.trial]
-    for (first, second) in pairs:
+    for (i, (first, second)) in enumerate(pairs):
         t.clk.delay(config.INTER_STUDY_DURATION, jitter=config.JITTER)
+#         if stimTrial:
+#             if ((i % 2 == 1) and stimOdds) or ((i % 2 == 0) and (stimOdds == False)):
+#                 t.log.logMessage("START_STIM_AFTER " + str(timing.now()))
+#                 t.studyPulseControl.startPulses(t.clk)
         stamp = flashStimulus(Text(first + "\n\n\n" + second), duration=config.STUDY_PRESENTATION_DURATION, jitter=config.JITTER, clk=t.clk)
         #log word presentations
         t.log.logMessage("STUDY_WORDS_%s_%s\tTRIAL_%d" % (first, second, state.trial), stamp)
@@ -170,10 +175,13 @@ def runTrial(t, exp, config, stimTrial, state):
 
 def stimOnOff(t, config):
     flashStimulus(Text("Starting test stim cycle"), duration=3000)
-    t.cyclePulseControl.startPulses(t.clk)
     for i in range(config.PULSE_CYCLES):
         t.log.logMessage("PULSE_CYCLE_START", t.clk)
-        t.cyclePulseControl.startPulses(t.clk)
+
+        t.pulseControl.pulseLen = (1000 / config.STIM_PULSE_FREQ) / 2
+        t.pulseControl.maxPulses = (config.CYCLE_PULSE_ON_DURATION / t.pulseControl.pulseLen) / 2
+        t.pulseControl.startPulses(t.clk)
+
         flashStimulus(Text("Background stim #" + str(i)), duration=config.CYCLE_PULSE_ON_DURATION + config.CYCLE_PULSE_OFF_DURATION)
 
 def sync(t, config):
