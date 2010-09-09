@@ -1,3 +1,6 @@
+#how man SECONDS should the sync period be
+SYNC_DURATION_SECONDS = 60
+
 #Brad - 6
 PAIRS_PER_TRIAL = 6
 #Brad - 25

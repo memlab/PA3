@@ -177,7 +177,8 @@ def stimOnOff(t, config):
         flashStimulus(Text("Background stim #" + str(i)), duration=config.CYCLE_PULSE_ON_DURATION + config.CYCLE_PULSE_OFF_DURATION)
 
 def sync(t, config):
-    pass
+    for i in range(config.SYNC_DURATION_SECONDS):
+        flashStimulus(Text(str(config.SYNC_DURATION_SECONDS - i)), duration=1000)
 
 
 
