@@ -49,16 +49,16 @@ CONFIRMATION_DURATION = 1500
 #stim parameters
 #how long should the mini-pulses go on for in the 10 x 2 on 10 off cycle
 #Brad - 2000
-CYCLE_PULSE_ON_DURATION = 2000
+CYCLE_PULSE_ON_DURATION = 1000
 #how long should the mini-pulses go off for in the 10 x 2 on 10 off cycle
 #Brad - 10000
-CYCLE_PULSE_OFF_DURATION = 10000
+CYCLE_PULSE_OFF_DURATION = 1000
 #number of such cycles
-PULSE_CYCLES = 10
+PULSE_CYCLES = 2
 
 #frequency of pulse for stimulating study/cue, and background data. measured in number of pulses per second.
 #PA2 - 100
-STIM_PULSE_FREQ = 100
+STIM_PULSE_FREQ = 10
 
 
 EXP_NAME="PYPA3"
