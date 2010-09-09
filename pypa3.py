@@ -165,7 +165,7 @@ def runTrial(t, exp, config, stimTrial, state):
 
         #stim
         if stimTrial:
-            if ((i % 2 == 1) and stimOdds) or ((i % 2 == 0) and (stimOdds == False)):
+            if ((index % 2 == 1) and stimOdds) or ((index % 2 == 0) and (stimOdds == False)):
                 t.log.logMessage("START_CUE_STIM_AFTER " + str(timing.now()))
                 t.pulseControl.pulseLen = (1000 / config.STIM_PULSE_FREQ) / 2
                 t.pulseControl.maxPulses = (config.CUE_PRESENTATION_DURATION / t.pulseControl.pulseLen) / 2
