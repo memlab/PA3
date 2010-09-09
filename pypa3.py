@@ -128,10 +128,14 @@ def runTrial(t, exp, config, stimTrial, state):
     pairs = state.trialData[0][state.trial]
     for (i, (first, second)) in enumerate(pairs):
         t.clk.delay(config.INTER_STUDY_DURATION, jitter=config.JITTER)
-#         if stimTrial:
-#             if ((i % 2 == 1) and stimOdds) or ((i % 2 == 0) and (stimOdds == False)):
-#                 t.log.logMessage("START_STIM_AFTER " + str(timing.now()))
-#                 t.studyPulseControl.startPulses(t.clk)
+        if stimTrial:
+            if ((i % 2 == 1) and stimOdds) or ((i % 2 == 0) and (stimOdds == False)):
+                t.log.logMessage("START_STIM_AFTER " + str(timing.now()))
+                t.pulseControl.pulseLen = (1000 / config.STIM_PULSE_FREQ) / 2
+                t.pulseControl.maxPulses = ((config.STUDY_PRESENTATION_DURATION + config.INTER_STUDY_DURATION) / t.pulseControl.pulseLen) / 2
+                t.pulseControl.startPulses(t.clk)
+
+
         stamp = flashStimulus(Text(first + "\n\n\n" + second), duration=config.STUDY_PRESENTATION_DURATION, jitter=config.JITTER, clk=t.clk)
         #log word presentations
         t.log.logMessage("STUDY_WORDS_%s_%s\tTRIAL_%d" % (first, second, state.trial), stamp)
