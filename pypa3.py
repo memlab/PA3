@@ -136,7 +136,7 @@ def runTrial(t, exp, config, stimTrial, state):
                 t.pulseControl.startPulses(t.clk)
 
 
-        stamp = flashStimulus(Text(first + "\n\n\n" + second), duration=config.STUDY_PRESENTATION_DURATION, jitter=config.JITTER, clk=t.clk)
+        stamp = flashStimulus(Text(first + "\n\n" + second), duration=config.STUDY_PRESENTATION_DURATION, jitter=config.JITTER, clk=t.clk)
         #log word presentations
         t.log.logMessage("STUDY_WORDS_%s_%s\tTRIAL_%d" % (first, second, state.trial), stamp)
 
@@ -160,8 +160,8 @@ def runTrial(t, exp, config, stimTrial, state):
 
     random.shuffle(cueIndexes)
     for i in range(2):
-        if last(cueIndexes) >= (len(cueIndex) - 1):
-            cueInexes.insert(0, cueIndexes.pop(i))
+        if last(cueIndexes) >= (len(cueIndexes) - 1):
+            cueInexes.insert(0, cueIndexes.pop(len(cueIndexes) - 1))
 
     for index in cueIndexes:
         cue = random.choice(pairs[index])

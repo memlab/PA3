@@ -54,7 +54,7 @@ CYCLE_PULSE_ON_DURATION = 2000
 #Brad - 10000
 CYCLE_PULSE_OFF_DURATION = 10000
 #number of such cycles
-PULSE_CYCLES = 10
+PULSE_CYCLES = 0
 
 #frequency of pulse for stimulating study/cue, and background data. measured in number of pulses per second.
 #PA2 - 100
