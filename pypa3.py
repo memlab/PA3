@@ -154,7 +154,15 @@ def runTrial(t, exp, config, stimTrial, state):
     #log the presentation of the orienting stimulus
     t.log.logMessage("TEST_ORIENT\tTRIAL_%d" % (state.trial), stamp)
     cueIndexes = [i for i in range(len(pairs))]
+
+    def last(lst):
+        lst[len(lst) - 1]
+
     random.shuffle(cueIndexes)
+    for i in range(2):
+        if last(cueIndexes) >= (len(cueIndex) - 1):
+            cueInexes.insert(0, cueIndexes.pop(i))
+
     for index in cueIndexes:
         cue = random.choice(pairs[index])
         t.clk.delay(config.INTER_CUE_DURATION)
