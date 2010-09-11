@@ -155,18 +155,30 @@ def runTrial(t, exp, config, stimTrial, state):
     t.log.logMessage("TEST_ORIENT\tTRIAL_%d" % (state.trial), stamp)
     cueIndexes = [i for i in range(len(pairs))]
 
-    def last(lst):
-        return lst[len(lst) - 1]
-    
-    def nextToLast(lst):
-        return lst[len(lst) - 2]
-
     random.shuffle(cueIndexes)
-    for i in range(2):
-        if last(cueIndexes) >= (len(cueIndexes) - 2):
-            cueIndexes.insert(0, cueIndexes.pop(len(cueIndexes) - 1))
-        if nextToLast(cueIndexes) >= (len(cueIndexes) - 2):
-            cueIndexes.insert(0, cueIndexes.pop(len(cueIndexes) - 2))
+
+    def isEven(num):
+        return num % 2 == 0
+
+    def firstNonRecent(even, lst):
+        for i in range(len(lst)):
+            cur = lst[i]
+            if cur > len(pairs) - 3:
+                pass
+            elif (even and isEven(cur)) or (not even and  not isEven(cur)):
+                return i
+
+    #because of recency effect, first two cues should not be among last two studied
+    print cueIndexes
+    lastTwo = []
+    index = firstNonRecent(True, cueIndexes)
+    lastTwo.append(cueIndexes.pop(index))
+    index = firstNonRecent(False, cueIndexes)
+    lastTwo.append(cueIndexes.pop(index))
+
+    #also, there should not be two stims in a row
+
+
 
 
     for index in cueIndexes:
