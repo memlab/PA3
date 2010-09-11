@@ -156,12 +156,18 @@ def runTrial(t, exp, config, stimTrial, state):
     cueIndexes = [i for i in range(len(pairs))]
 
     def last(lst):
-        lst[len(lst) - 1]
+        return lst[len(lst) - 1]
+    
+    def nextToLast(lst):
+        return lst[len(lst) - 2]
 
     random.shuffle(cueIndexes)
     for i in range(2):
-        if last(cueIndexes) >= (len(cueIndexes) - 1):
-            cueInexes.insert(0, cueIndexes.pop(len(cueIndexes) - 1))
+        if last(cueIndexes) >= (len(cueIndexes) - 2):
+            cueIndexes.insert(0, cueIndexes.pop(len(cueIndexes) - 1))
+        if nextToLast(cueIndexes) >= (len(cueIndexes) - 2):
+            cueIndexes.insert(0, cueIndexes.pop(len(cueIndexes) - 2))
+
 
     for index in cueIndexes:
         cue = random.choice(pairs[index])
