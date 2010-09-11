@@ -176,11 +176,25 @@ def runTrial(t, exp, config, stimTrial, state):
     index = firstNonRecent(False, cueIndexes)
     lastTwo.append(cueIndexes.pop(index))
 
+
+    def popNext(even, lst):
+        for i in range(len(lst)):
+            cur = lst[i]
+            if (even and isEven(cur)) or (not even and  not isEven(cur)):
+                return lst.pop(i)
+            
     #also, there should not be two stims in a row
+    firstOnes = []
+    extractEven = True
+    while(len(cueIndexes) > 0):
+        firstOnes.append(popNext(extractEven, cueIndexes))
+        extractEven = not extractEven
+        
 
 
-
-
+    cueIndexes = firstOnes + lastTwo
+    print cueIndexes
+    print
     for index in cueIndexes:
         cue = random.choice(pairs[index])
         t.clk.delay(config.INTER_CUE_DURATION)
@@ -240,6 +254,10 @@ def runSubject(t, exp, config, stimExperiment):
 
     if state.trial >= len(state.trialData[0]):
         print "No more sessions!"
+        return
+
+    if config.PAIRS_PER_TRIAL % 2 != 0:
+        print "PAIRS_PER_TRIAL must be even!"
         return
 
     print "YOU ARE CURRENTLY ON TRIAL #" + str(state.trial)
