@@ -316,19 +316,19 @@ def run(exp,config):
 
         doSync = waitForYKey("Would you like to sync?\nPress 'y' for yes, any other key for no.")
         if doSync:
-            waitForAnyKey(t.clk, Text("Please plug into EEG RIG.\n\nThen press any key to continue"))
+            waitForAnyKey(clock, Text("Please plug into EEG RIG.\n\nThen press any key to continue"))
             sync(t, config)
         if stimTrial:
-            elec = textInput("Electrodes: ", t.vid, t.key, t.clk)
-            t.log.logMessage("TRIAL_%d ELECTRODES_%s" % (state.trial, elec), t.clk)
-            cur = textInput("Current: ", t.vid, t.key, t.clk)
-            t.log.logMessage("TRIAL_%d CURRENT_%s" % (state.trial, cur), t.clk)
+            elec = textInput("Electrodes: ", video, keyboard, clock)
+            t.log.logMessage("TRIAL_%d ELECTRODES_%s" % (state.trial, elec), clock)
+            cur = textInput("Current: ", video, keyboard, clock)
+            t.log.logMessage("TRIAL_%d CURRENT_%s" % (state.trial, cur), clock)
 
-            waitForAnyKey(t.clk, Text("Please plug into STIMULATOR.\n\nThen press any key."))
+            waitForAnyKey(clock, Text("Please plug into STIMULATOR.\n\nThen press any key."))
             stimOnOff(t, config)
 
 
-        waitForAnyKey(t.clk, Text("Press any key to start trial."))
+        waitForAnyKey(clock, Text("Press any key to start trial."))
         flashStimulus(Text(""), duration=config.AFTER_STIM_QUESTION)
 
         ####### STUDY ######

@@ -1,6 +1,9 @@
 #---- new to PA3 ----#
 #how long to give thie stim/no stim confirmation after key press
 CONFIRMATION_DURATION = 1500
+#how long to wait between an answer the to "is this a stim trial?" question
+#and the beginning of the study sequence
+AFTER_STIM_QUESTION = 3000
 
 #---- from PA2 ----#
 # The following parameters were taken from the config.ini file attained
