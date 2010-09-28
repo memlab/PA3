@@ -32,7 +32,7 @@ NUM_TRIALS=25           # number of trials total (must be odd)
 MIN_SPACING=3 	        # min # of items between study and test. 
 			# must be less than half of NUM_PAIRS
 
-USE_INTERFERENCE=1	# use interference when constructing lists?
+USE_INTERFERENCE=0	# use interference when constructing lists?
 
 USE_CORRELATION=0	# use correlations when constructing pairs?
 
