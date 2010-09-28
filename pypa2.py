@@ -320,9 +320,9 @@ def run(exp,config):
             sync(t, config)
         if stimTrial:
             elec = textInput("Electrodes: ", video, keyboard, clock)
-            t.log.logMessage("TRIAL_%d ELECTRODES_%s" % (state.trial, elec), clock)
+            log.logMessage("TRIAL_%d ELECTRODES_%s" % (state.trial, elec), clock)
             cur = textInput("Current: ", video, keyboard, clock)
-            t.log.logMessage("TRIAL_%d CURRENT_%s" % (state.trial, cur), clock)
+            log.logMessage("TRIAL_%d CURRENT_%s" % (state.trial, cur), clock)
 
             waitForAnyKey(clock, Text("Please plug into STIMULATOR.\n\nThen press any key."))
             stimOnOff(t, config)
