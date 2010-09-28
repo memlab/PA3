@@ -1,1 +1,4 @@
-- pairs of words will be shown at the same time instead of one following the other
+This document reflects changes from pypa2 to PA3.
+
+- Pairs of words will be shown at the same time instead of one following the other.
+- The intro file is changed to reflect that words appear in pairs, and that there may not necessarily be 6 pairs.
