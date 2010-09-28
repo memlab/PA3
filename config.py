@@ -1,4 +1,9 @@
- # The following parameters were taken from the config.ini file attained
+#---- new to PA3 ----#
+#how long to give thie stim/no stim confirmation after key press
+CONFIRMATION_DURATION = 1500
+
+#---- from PA2 ----#
+# The following parameters were taken from the config.ini file attained
 # with the orinal py2 experiment
 
 JITTER=75	        # (+/- jitter) introduced to presentation timing

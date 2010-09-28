@@ -306,6 +306,12 @@ def run(exp,config):
     instruct(trialconfig.INTRO_FILE,clk=clock)
 
     while (state.trial < trialconfig.NUM_TRIALS):
+        stimExperiment = waitForYKey("Is this a stim experiment?\nPress 'y' for yes, any other key for no.")
+        if stimExperiment:
+            msg = "Okay this IS a stim experiment"
+        else:
+            msg = "Okay this is NOT a stim experiment"
+        flashStimulus(Text(msg), duration=config.CONFIRMATION_DURATION)
 
         ####### STUDY ######
 	video.clear("black")
@@ -414,6 +420,18 @@ def run(exp,config):
 			     "Please inform the experimenter"))
 
 
+
+def waitForYKey(msg):
+    v = VideoTrack.lastInstance()
+    v.clear('black')
+    shown = v.showCentered(Text(msg))
+    v.updateScreen(None)
+    k = KeyTrack.lastInstance()
+    bc = k.keyChooser()
+    but, timestamp = bc.waitWithTime(None)
+    v.unshow(shown)
+    v.updateScreen(None)
+    return but.keyname == 'Y'
 
 
 # only do this if the experiment is run as a stand-alone program 
