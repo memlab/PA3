@@ -5,7 +5,8 @@ The corresponding log change is:
 - log.logMessage("STUDY_WORD_%d\tTRIAL_%d"%(word,state.trial),stamp)
 + log.logMessage("STUDY_PAIR_%d\tTRIAL_%d"%(pair, state.trial), stamp)
 
-- The intro file is changed to reflect that words appear in pairs, and that there may not necessarily be 6 pairs.
+- The instructions file is changed to reflect that words appear in pairs, and that there may not necessarily be 6 pairs.
+- The instructions file is changed to inform the subjects they should hit the space bar after saying the recalled word or "pass", to proceed to the next cue. That point is unclear with the present instructions.
 
 - At the beginning of each trial, the experimenter is prompted to enter the current and electrode number, so the information can be saved in the log.
 
