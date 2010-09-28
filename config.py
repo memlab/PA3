@@ -4,6 +4,11 @@ CONFIRMATION_DURATION = 1500
 #how long to wait between an answer the to "is this a stim trial?" question
 #and the beginning of the study sequence
 AFTER_STIM_QUESTION = 3000
+#how man SECONDS should the sync period be
+SYNC_DURATION_SECONDS = 60
+#frequency of pulse for stimulating study/cue, and background data. measured in number of pulses per second.
+#PyFR_Stim - 100
+STIM_PULSE_FREQ = 100
 
 #---- from PA2 ----#
 # The following parameters were taken from the config.ini file attained
