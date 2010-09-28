@@ -249,7 +249,7 @@ def prepare(exp,config):
     # For each trial
     for trial in range (0,num_trials):
 	# Setup interference. Half of the pairs in each list (except the
-	# first) use interferencef rom a previous list
+	# first) use interference from a previous list
 	if((trial!=0) and (use_interference == 1)):
 	    for i in range(0,num_pairs/2):
 		while 1:
