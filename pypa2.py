@@ -324,16 +324,17 @@ def run(exp,config):
 	    # Log the presentation of the orienting stimulus
 	    log.logMessage("STUDY_ORIENT\tTRIAL_%d"%(state.trial),stamp)
 
-	    # present the words in order
-	    for word in range(0,2):
-		# present the word
-		clock.delay(trialconfig.DELAY_WORD,jitter=trialconfig.JITTER)
-		state.trialData[pair].tWord[word] = clock.get()
-		stamp = flashStimulus(Text(state.trialData[pair].word[word]),
-				      duration=trialconfig.DURATION_WORD,
-				      clk=clock)
-		# Log the presentation of each word in the pair
-		log.logMessage("STUDY_WORD_%d\tTRIAL_%d"%(word,state.trial),stamp)
+            # present the pair of words
+            clock.delay(trialconfig.DELAY_WORD,jitter=trialconfig.JITTER)
+            now = clock.get()
+            state.trialData[pair].tWord[0] = now
+            state.trialData[pair].tWord[1] = now
+            text = state.trialData[pair].word[0] + "\n\n" + state.trialData[pair].word[1]
+            stamp = flashStimulus(Text(text),
+                                  duration=trialconfig.DURATION_WORD,
+                                  clk=clock)
+            # Log the presentation of each word in the pair
+            log.logMessage("STUDY_PAIR_%d\tTRIAL_%d"%(pair, state.trial), stamp)
 
         ######  TEST   ######
 	# Cued Recall
