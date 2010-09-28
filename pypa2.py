@@ -312,6 +312,7 @@ def run(exp,config):
         else:
             msg = "Okay this is NOT a stim experiment"
         flashStimulus(Text(msg), duration=config.CONFIRMATION_DURATION)
+        log.logMessage("TRIAL_%d\nSTIM_%s"%(state.trial, str(stimExperiment)),clock)
 
         ####### STUDY ######
 	video.clear("black")
