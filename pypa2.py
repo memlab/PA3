@@ -381,7 +381,7 @@ def run(exp,config):
             log.logMessage("TRIAL_%d CURRENT_%s" % (state.trial, cur), clock)
 
             waitForAnyKey(clock, Text("Please plug into STIMULATOR.\n\nThen press any key."))
-            stimOnOff(t, config)
+            stimOnOff(log, pulseControl, clock, config)
 
 
         waitForAnyKey(clock, Text("Press any key to start trial."))

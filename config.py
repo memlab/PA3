@@ -6,9 +6,18 @@ CONFIRMATION_DURATION = 1500
 AFTER_STIM_QUESTION = 3000
 #how man SECONDS should the sync period be
 SYNC_DURATION_SECONDS = 60
+
+#stim parameters                                                                                                                        #how long should the mini-pulses go on for in the 10 x 2 on 10 off cycle                                                                #Brad - 2000
+CYCLE_PULSE_ON_DURATION = 2000
+#how long should the mini-pulses go off for in the 10 x 2 on 10 off cycle
+#Brad - 10000
+CYCLE_PULSE_OFF_DURATION = 10000
+#number of such cycles
+PULSE_CYCLES = 10
 #frequency of pulse for stimulating study/cue, and background data. measured in number of pulses per second.
 #PyFR_Stim - 100
 STIM_PULSE_FREQ = 100
+
 
 #---- from PA2 ----#
 # The following parameters were taken from the config.ini file attained
