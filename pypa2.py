@@ -1,8 +1,14 @@
 #!/usr/bin/python
 
+#standard imports
+import sys
+import random
+
 #import PyEPL symbols into this namespace:
 from pyepl.locals import *
-import random
+from pyepl import display
+from pyepl.hardware import addPollCallback
+
 
 
 # The following parameters were taken from the pa2.h file attained
@@ -346,7 +352,7 @@ def run(exp,config):
     eeg = EEGTrack("eeg", autoStart=False)
     eeg.startService()
     eeg.logall = True
-    pulseControl = PulseThread(self.eeg, config)
+    pulseControl = PulseThread(eeg, config)
 
     # create a PresentationClock to handle timing
     clock = PresentationClock()
