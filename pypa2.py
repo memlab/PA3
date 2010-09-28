@@ -448,6 +448,49 @@ def waitForYKey(msg):
     v.updateScreen(None)
     return but.keyname == 'Y'
 
+def textInput(screenText, video, keyboard, clock):
+
+    # set up keyboard entry
+    ans_but = keyboard.keyChooser()
+
+    done = False
+    while not done:
+
+        rstr = ''
+        field = video.showProportional(Text(screenText),.4,.5)
+        input = video.showRelative(Text(rstr),RIGHT,field,20)
+        video.updateScreen(clock)
+
+        kret,timestamp = ans_but.waitWithTime(maxDuration = None, clock=clock)
+
+        while kret:
+            
+            # process the response
+            if kret.name == 'BACKSPACE':
+                
+                # remove last char
+                if len(rstr) > 0:
+                    rstr = rstr[:-1]
+
+                # update text
+                input = video.replace(input,Text(rstr))
+                video.updateScreen(clock)
+                kret,timestamp = ans_but.waitWithTime(maxDuration = None,clock=clock)
+                
+            elif kret.name not in ['BACKSPACE','RETURN','ENTER']:
+                newstr = kret.name.strip('[]')
+                rstr = rstr + newstr
+
+                # update the text
+                input = video.replace(input,Text(rstr))
+                video.updateScreen(clock)
+                kret,timestamp = ans_but.waitWithTime(maxDuration = None,clock=clock)
+                
+            elif kret.name in ['RETURN','ENTER']:
+                video.clear("black")
+                return rstr
+
+
 
 # only do this if the experiment is run as a stand-alone program 
 #(not imported as a library)...
