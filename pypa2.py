@@ -306,13 +306,30 @@ def run(exp,config):
     instruct(trialconfig.INTRO_FILE,clk=clock)
 
     while (state.trial < trialconfig.NUM_TRIALS):
-        stimExperiment = waitForYKey("Is this a stim experiment?\nPress 'y' for yes, any other key for no.")
-        if stimExperiment:
-            msg = "Okay this IS a stim experiment"
+        stimTrial = waitForYKey("Is this a stim trial?\nPress 'y' for yes, any other key for no.")
+        if stimTrial:
+            msg = "Okay this IS a stim trial"
         else:
-            msg = "Okay this is NOT a stim experiment"
+            msg = "Okay this is NOT a stim trial"
         flashStimulus(Text(msg), duration=config.CONFIRMATION_DURATION)
-        log.logMessage("TRIAL_%d\nSTIM_%s"%(state.trial, str(stimExperiment)),clock)
+        log.logMessage("TRIAL_%d\nSTIM_%s"%(state.trial, str(stimTrial)),clock)
+
+        doSync = waitForYKey("Would you like to sync?\nPress 'y' for yes, any other key for no.")
+        if doSync:
+            waitForAnyKey(t.clk, Text("Please plug into EEG RIG.\n\nThen press any key to continue"))
+            sync(t, config)
+        if stimTrial:
+            elec = textInput("Electrodes: ", t.vid, t.key, t.clk)
+            t.log.logMessage("TRIAL_%d ELECTRODES_%s" % (state.trial, elec), t.clk)
+            cur = textInput("Current: ", t.vid, t.key, t.clk)
+            t.log.logMessage("TRIAL_%d CURRENT_%s" % (state.trial, cur), t.clk)
+
+            waitForAnyKey(t.clk, Text("Please plug into STIMULATOR.\n\nThen press any key."))
+            stimOnOff(t, config)
+
+
+        waitForAnyKey(t.clk, Text("Press any key to start trial."))
+        flashStimulus(Text(""), duration=config.AFTER_STIM_QUESTION)
 
         ####### STUDY ######
 	video.clear("black")
@@ -413,9 +430,6 @@ def run(exp,config):
 	exp.saveState(state,trial=state.trial+1)
         #get the state
 	state = exp.restoreState()
-
-        waitForAnyKey(clock,Text("Press any key to continue\n"+
-				 "onto the next list."))
 
     waitForAnyKey(clock,Text("You have finished.\n"+
 			     "Please inform the experimenter"))

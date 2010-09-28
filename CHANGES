@@ -21,3 +21,12 @@ The corresponding log change is:
 - By "stim during recall" I mean stim for the first 2 seconds of the period the cue word is on the screen.
 
 - The algorithm to determine which words will be used will be modified to prevent words from ever being re-used (i.e., studied twice).
+
+- OLD SEQUENCE:
+subject presses any key to start a given trial
+
+- NEW SEQUENCE:
+experimenter is asked if stim will be used.
+experimenter is asked if he/she would like to do sync'ing
+if stim is being used, experimenter is asked for electrode and current information
+subject presses any key to start a given trial
