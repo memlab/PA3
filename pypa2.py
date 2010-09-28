@@ -373,7 +373,7 @@ def run(exp,config):
         doSync = waitForYKey("Would you like to sync?\nPress 'y' for yes, any other key for no.")
         if doSync:
             waitForAnyKey(clock, Text("Please plug into EEG RIG.\n\nThen press any key to continue"))
-            sync(log, pulseControl, config)
+            sync(log, pulseControl, clock, config)
         if stimTrial:
             elec = textInput("Electrodes: ", video, keyboard, clock)
             log.logMessage("TRIAL_%d ELECTRODES_%s" % (state.trial, elec), clock)
@@ -493,23 +493,23 @@ def run(exp,config):
 
 
 
-def stimOnOff(t, config):
+def stimOnOff(log, pulseControl, clock, config):
     flashStimulus(Text("Starting test stim cycle"), duration=3000)
     for i in range(config.PULSE_CYCLES):
-        t.log.logMessage("PULSE_CYCLE_START", t.clk)
+        log.logMessage("PULSE_CYCLE_START", clock)
 
-        t.pulseControl.pulseLen = (1000 / config.STIM_PULSE_FREQ) / 2
-        t.pulseControl.maxPulses = (config.CYCLE_PULSE_ON_DURATION / t.pulseControl.pulseLen) / 2
-        t.pulseControl.startPulses(t.clk)
+        pulseControl.pulseLen = (1000 / config.STIM_PULSE_FREQ) / 2
+        pulseControl.maxPulses = (config.CYCLE_PULSE_ON_DURATION / pulseControl.pulseLen) / 2
+        pulseControl.startPulses(clock)
 
         flashStimulus(Text("Background stim #" + str(i)), duration=config.CYCLE_PULSE_ON_DURATION + config.CYCLE_PULSE_OFF_DURATION)
 
-def sync(log, pulseControl, config):
+def sync(log, pulseControl, clock, config):
     log.logMessage("START_SYNC_STIMS_AFTER")
     for i in range(config.SYNC_DURATION_SECONDS):
         pulseControl.pulseLen = (1000 / config.STIM_PULSE_FREQ) / 2
         pulseControl.maxPulses = 1
-        pulseControl.startPulses(t.clk)
+        pulseControl.startPulses(clock)
 
         flashStimulus(Text(str(config.SYNC_DURATION_SECONDS - i)), duration=1000, jitter=config.JITTER)
 
