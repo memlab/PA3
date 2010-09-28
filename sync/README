@@ -1,4 +1,0 @@
-run with:
-    pythonw sync.py -s SUBJECT_ID --no-fs
-
-keep an eye on the terminal to make sure there are no EEG errors

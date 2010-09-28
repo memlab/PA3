@@ -1,0 +1,66 @@
+**********************************************************
+**********************************************************
+
+PA2 README
+
+  1. EXPERIMENTAL DESIGN
+  2. RUNNING PA2
+  3. SCORING THE DATA
+  4. ANALYSIS
+
+**********************************************************
+**********************************************************
+
+
+1. EXPERIMENTAL DESIGN
+
+The PA2 experiment was designed to be used specifically during
+electrophysiological recordings. This experiment uses interference
+versus no interference, forward versus backward recall, and item
+versus associative encoding to try and elicit differences in brain
+activation.
+
+
+2. RUNNING PA2
+
+First check to see that the appropriate links for your language are 
+made in the txt/ directory. For example, if running in Germany, 
+'nounpool.txt' should be a link to 'nounpool_german.txt', and 'intro.txt'
+should be linked to 'intro_german.txt'. Once the proper links have been 
+configured, make sure that 'config.ini' has the configuration you desire.
+
+Then type,
+
+   pythonw pypa2.py -s SUBJECT_ID
+
+and enter the subject identifier in place of SUBJECT_ID. You may quit 
+the experiment between trials by pressing the ESC-F1 keys together. 
+The experimenter is required to hit a key after each subject response 
+to proceed to the next trial.
+
+
+3. SCORING THE DATA
+
+  pythonw pypa2_score.py -s SUBJECT_ID
+
+then enter subject number at the prompt. A correct response can be
+recorded by entering the 'Y' key.  The program will also recognize the
+word 'P' for pass, 'N' for no (or incorrect), and 'M' for near miss.  
+To listen to the response again, press the <enter> key.
+
+
+4. ANALYSIS
+
+  pythonw pypa2_save.py -s SUBJECT_ID
+
+The behavioral results of the experiment are contained within the 
+subdat.csv file. 
+
+The EEG results can can be found in 
+data/SUBJECT_ID/session_RUN/eeg.eeglog and 
+data/SUBJECT_ID/session_RUN/session.log .
+
+The analyze_subject.m script can be run from within matlab to assess
+the performance of an individual subject. This script is well
+documented.
+

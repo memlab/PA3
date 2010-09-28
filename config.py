@@ -1,65 +1,67 @@
-#how man SECONDS should the sync period be
-SYNC_DURATION_SECONDS = 60
+ # The following parameters were taken from the config.ini file attained
+# with the orinal py2 experiment
 
-#Brad - 6
-PAIRS_PER_TRIAL = 6
-#Brad - 25
-NUM_TRIALS = 25
-#Brad - 200
-JITTER = 200
+JITTER=75	        # (+/- jitter) introduced to presentation timing
 
-#Brad - 1200
-#length of time between stimuli, when screen is blank
-#also the delay between study and recall periods
-INTER_STUDY_DURATION = 1200
+NUM_PAIRS=6	        # number of pairs in each list (must be even)
 
-#Brad - 1600
-#how long a word is on screen for study
-STUDY_PRESENTATION_DURATION = 1600
+NUM_TRIALS=25           # number of trials total (must be odd)
 
-#Brad - 1600
-#length of time between cues (i.e. recall words), when screen is blank
-INTER_CUE_DURATION = 1600
+MIN_SPACING=3 	        # min # of items between study and test. 
+			# must be less than half of NUM_PAIRS
 
-#Brad - 2600
-#how long a cue (recall word) is on screen, also possibly stimming
-CUE_PRESENTATION_DURATION = 2600
+USE_INTERFERENCE=1	# use interference when constructing lists?
 
-#how long the study orientation will be on the screen
-STUDY_ORIENTATION_DURATION = 1500
-STUDY_ORIENTATION ="XXXXXX"
+USE_CORRELATION=0	# use correlations when constructing pairs?
 
-#how long the recall orientation will be on the screen
-RECALL_ORIENTATION_DURATION = 1500
-RECALL_ORIENTATION = "??????"
+MIN_CORRELATION=-.1
+
+MAX_CORRELATION=0.3
+
+RECORD_LEN=0    	# length of time to record subjects response 
+                        # (zero indicates record until button is pressed)
 
 
+# all timing values are in milliseconds
+DELAY_ORIENT=1500	# delay before the orienting stimulus (also 
+                        #the delay after presentation of a word pair)
+
+DURATION_ORIENT=300	# duration of the orienting stimulus
+
+DELAY_WORD=750	        # delay before presentation of a word
+
+DURATION_WORD=1400	# duration of presentation of a word
+
+DELAY_CUE=750	        # delay before presentation of the cue
+
+DURATION_CUE=0	        # durzation of presentation of the cue (zero indicates 
+                        # the the probe should be left on until the 
+                        # subject makes a response)
+
+# The following parameters were taken from the config.ini file attained
+# with the orinal py2 experiment
+
+DATA_DIR="data"
+MARKER_FILE="marker.bin"
+BEHAV_FILE="behav.txt"
+MATLAB_FILE="subdat.csv"
+CONF_FILE="config.ini"
+SYNC_FILE="syncfile.txt"
+
+CORR_FILE="txt/wordmatrix.txt"
 POOL_FILE="txt/nounpool.txt"
-INSTRUCTIONS = open("txt/intro.txt").read()
+INTRO_FILE=open("txt/intro.txt").read()
 
-#how long to wait between an answer the to "is this a stim trial?" question
-#and the beginning of the study sequence
-AFTER_STIM_QUESTION = 3000
-#how long to give thie stim/no stim confirmation after key press
-CONFIRMATION_DURATION = 1500
-
-
-
-
-#stim parameters
-#how long should the mini-pulses go on for in the 10 x 2 on 10 off cycle
-#Brad - 2000
-CYCLE_PULSE_ON_DURATION = 2000
-#how long should the mini-pulses go off for in the 10 x 2 on 10 off cycle
-#Brad - 10000
-CYCLE_PULSE_OFF_DURATION = 10000
-#number of such cycles
-PULSE_CYCLES = 10
-
-#frequency of pulse for stimulating study/cue, and background data. measured in number of pulses per second.
-#PA2 - 100
-STIM_PULSE_FREQ = 100
-
-
-EXP_NAME="PYPA3"
+EXP_NAME="PYPA2"
 EXP_VERSION="v1.0"
+ORIENTING_STUDY="XXXXXX"
+ORIENTING_TEST="??????"
+
+DIR_PERM=0755
+ESC_KEY=27
+ENTER_KEY=10
+
+# if using word correlations to determine list structure, this
+# parameter determines the minimum acceptable difference between the
+# minCorr and maxCorr parameters
+MIN_CORR_DIFF=0.3
