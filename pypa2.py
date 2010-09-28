@@ -23,6 +23,51 @@ FORW_INT   = 2
 BACK_INT   = 3
 NUM_CONDITIONS = 4
 
+class PulseThread:
+    """
+    Finer control of pulse timing.
+    """
+    
+    def __init__(self, eeg, config):
+        self.sendPulse = False
+        self.EEGTrack = eeg
+        self.config = config
+        self.lastPulse = timing.now()
+        self.pulseCount = 0
+        addPollCallback(self.EEGpulseCallback)
+
+    def stopPulses(self, clock = None):
+        if isinstance(clock, PresentationClock):
+            (timeInterval, returnValue) = timing.timedCall(clock.get(), self.stopPulses)
+        elif clock and not isinstance(clock, PresentationClock):
+            (timeInterval, returnValue) = timing.timedCall(clock, self.stopPulses)
+        else:
+            self.sendPulse = False
+            self.pulseCount = 0
+
+    def startPulses(self, clock = None):
+        if isinstance(clock, PresentationClock):
+            (timeInterval, returnValue) = timing.timedCall(clock.get(), self.startPulses)
+        elif clock and not isinstance(clock, PresentationClock):
+            (timeInterval, returnValue)=timing.timedCall(clock, self.stopPulses)
+        else:
+            self.sendPulse = True
+
+    def EEGpulseCallback(self):
+        """
+        Callback to manage sending pulses.
+        """
+        if self.sendPulse == True and (timing.now() >= self.lastPulse + self.pulseLen):
+            timeInterval = self.EEGTrack.timedPulse(self.pulseLen)
+            self.lastPulse = timeInterval[0]
+            self.pulseCount += 1
+            if self.pulseCount == self.maxPulses:
+                self.sendPulse = False
+                self.pulseCount = 0
+
+
+
+
 
 class TrialData:
     '''
@@ -294,9 +339,14 @@ def run(exp,config):
 
     # create tracks...
     video = VideoTrack("video")
+    flashStimulus(Text(""), duration=10) #hack to initialize video so PulseThread constructor won't fail
     audio = AudioTrack("audio")
     keyboard = KeyTrack("keyboard")
     log = LogTrack("session")
+    eeg = EEGTrack("eeg", autoStart=False)
+    eeg.startService()
+    eeg.logall = True
+    pulseControl = PulseThread(self.eeg, config)
 
     # create a PresentationClock to handle timing
     clock = PresentationClock()
@@ -317,7 +367,7 @@ def run(exp,config):
         doSync = waitForYKey("Would you like to sync?\nPress 'y' for yes, any other key for no.")
         if doSync:
             waitForAnyKey(clock, Text("Please plug into EEG RIG.\n\nThen press any key to continue"))
-            sync(t, config)
+            sync(log, pulseControl, config)
         if stimTrial:
             elec = textInput("Electrodes: ", video, keyboard, clock)
             log.logMessage("TRIAL_%d ELECTRODES_%s" % (state.trial, elec), clock)
@@ -448,12 +498,12 @@ def stimOnOff(t, config):
 
         flashStimulus(Text("Background stim #" + str(i)), duration=config.CYCLE_PULSE_ON_DURATION + config.CYCLE_PULSE_OFF_DURATION)
 
-def sync(t, config):
-    t.log.logMessage("START_SYNC_STIMS_AFTER")
+def sync(log, pulseControl, config):
+    log.logMessage("START_SYNC_STIMS_AFTER")
     for i in range(config.SYNC_DURATION_SECONDS):
-        t.pulseControl.pulseLen = (1000 / config.STIM_PULSE_FREQ) / 2
-        t.pulseControl.maxPulses = 1
-        t.pulseControl.startPulses(t.clk)
+        pulseControl.pulseLen = (1000 / config.STIM_PULSE_FREQ) / 2
+        pulseControl.maxPulses = 1
+        pulseControl.startPulses(t.clk)
 
         flashStimulus(Text(str(config.SYNC_DURATION_SECONDS - i)), duration=1000, jitter=config.JITTER)
 
