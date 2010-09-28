@@ -8,3 +8,4 @@ This document reflects changes from pypa2 to PA3.
 - For each trial the experimenter will be asked whether a synchronization period of sync pulses should be performed prior to the start of the study period.
 - By "stim during study" I mean stim for the full duration the word is on the screen, and the time the screen is blank until the next word appears.
 - By "stim during recall" I mean stim for the period the cue word is on the screen only.
+- The algorithm to determine which words will be used will be modified to prevent words from ever being re-used (i.e., studied twice).
