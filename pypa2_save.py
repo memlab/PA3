@@ -37,10 +37,8 @@ def save_data(exp,config):
     eeg_file = open(eeg_name,'w')
     matlab_file = open(matlab_name,'w')
 
-
     matlab_file.write("% serial_pos, probe_pos, interference(0,1), direction(0=F,1=B), correct(0,1)\n")
-    for i in range(0,trialconfig.NUM_TRIALS*trialconfig.NUM_PAIRS):
-        #mrk_file.write("
+    for i in range(0, trialconfig.NUM_TRIALS * trialconfig.NUM_PAIRS):
         matlab_file.write("%d\t%d\t%d\t%d\t%d\t%d\n"%
                           (state.trialData[i].presOrder,
                            state.trialData[i].cueOrder,
@@ -52,7 +50,8 @@ def save_data(exp,config):
     mrk_file.close()
     eeg_file.close()
     matlab_file.close()
-    waitForAnyKey(clock,Text("Data has been saved to" +
+    video.clear("black")
+    waitForAnyKey(clock,Text("Data has been saved to\n" +
 			     "%s"%(matlab_name)))
 
     
