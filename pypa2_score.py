@@ -103,8 +103,8 @@ def score(exp,config):
 		video.updateScreen(clock)
 
 		# And play the recorded repsonse from the subject
-		clip = AudioClip(fname)
-                clip.present(clock)
+		clip = FileAudioClip(fname)
+                audio.play(clip)
 		
 		# Was the subject's response the correct one?
 		response = buttonChoice(clk=clock,yes=Key('Y'),no=Key('N'),
