@@ -29,7 +29,7 @@ NUM_PAIRS=6	        # number of pairs in each list (must be even)
 
 NUM_TRIALS=25           # number of trials total (must be odd)
 
-MIN_SPACING=3 	        # min # of items between study and test. 
+MIN_SPACING=2 	        # min # of items between study and test. 
 			# must be less than half of NUM_PAIRS
 
 USE_INTERFERENCE=0	# use interference when constructing lists?
