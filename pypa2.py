@@ -357,7 +357,7 @@ def run(exp,config,t):
         else:
             msg = "Okay this is NOT a stim trial"
         flashStimulus(Text(msg), duration=config.CONFIRMATION_DURATION)
-        t.log.logMessage("TRIAL_%d\nSTIM_%s"%(state.trial, str(stimTrial)),t.clk)
+        t.log.logMessage("TRIAL_%d STIM_%s"%(state.trial, str(stimTrial)),t.clk)
 
         doSync = waitForYKey("Would you like to sync?\nPress 'y' for yes, any other key for no.")
         if doSync:
