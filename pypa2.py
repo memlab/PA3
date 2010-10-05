@@ -321,7 +321,7 @@ def prepare(exp,config):
     exp.saveState(None,trialData=trialData,trial=0,scoreTrial=0)
 	
 
-def run(exp,config):
+def run(exp,config,t):
     """
     Runs through the experiment trial-by-trial.
     """
@@ -343,23 +343,23 @@ def run(exp,config):
     # get session specific configuration
     trialconfig = config.sequence(state.trial)
 
-    # create tracks...
-    video = VideoTrack("video")
-    flashStimulus(Text(""), duration=10) #hack to initialize video so PulseThread constructor won't fail
-    audio = AudioTrack("audio")
-    keyboard = KeyTrack("keyboard")
-    log = LogTrack("session")
-    eeg = EEGTrack("eeg", autoStart=False)
-    eeg.startService()
-    eeg.logall = True
-    pulseControl = PulseThread(eeg, config)
+#     # create tracks...
+#     video = VideoTrack("video")
+#     flashStimulus(Text(""), duration=10) #hack to initialize video so PulseThread constructor won't fail
+#     audio = AudioTrack("audio")
+#     keyboard = KeyTrack("keyboard")
+#     log = LogTrack("session")
+#     eeg = EEGTrack("eeg", autoStart=False)
+#     eeg.startService()
+#     eeg.logall = True
+#     pulseControl = PulseThread(eeg, config)
 
-    # create a PresentationClock to handle timing
-    clock = PresentationClock()
+#     # create a PresentationClock to handle timing
+#     clock = PresentationClock()
 
     # present the instructions
-    video.clear('black')
-    instruct(trialconfig.INTRO_FILE,clk=clock)
+    t.vid.clear('black')
+    instruct(trialconfig.INTRO_FILE,clk=t.clk)
 
     while (state.trial < trialconfig.NUM_TRIALS):
         stimTrial = waitForYKey("Is this a stim trial?\nPress 'y' for yes, any other key for no.")
@@ -368,59 +368,59 @@ def run(exp,config):
         else:
             msg = "Okay this is NOT a stim trial"
         flashStimulus(Text(msg), duration=config.CONFIRMATION_DURATION)
-        log.logMessage("TRIAL_%d\nSTIM_%s"%(state.trial, str(stimTrial)),clock)
+        t.log.logMessage("TRIAL_%d\nSTIM_%s"%(state.trial, str(stimTrial)),t.clk)
 
         doSync = waitForYKey("Would you like to sync?\nPress 'y' for yes, any other key for no.")
         if doSync:
-            waitForAnyKey(clock, Text("Please plug into EEG RIG.\n\nThen press any key to continue"))
-            sync(log, pulseControl, clock, config)
+            waitForAnyKey(t.clk, Text("Please plug into EEG RIG.\n\nThen press any key to continue"))
+            sync(t.log, t.pulseControl, t.clk, config)
         if stimTrial:
-            elec = textInput("Electrodes: ", video, keyboard, clock)
-            log.logMessage("TRIAL_%d ELECTRODES_%s" % (state.trial, elec), clock)
-            cur = textInput("Current: ", video, keyboard, clock)
-            log.logMessage("TRIAL_%d CURRENT_%s" % (state.trial, cur), clock)
+            elec = textInput("Electrodes: ", t.vid, t.key, t.clk)
+            t.log.logMessage("TRIAL_%d ELECTRODES_%s" % (state.trial, elec), t.clk)
+            cur = textInput("Current: ", t.vid, t.key, t.clk)
+            t.log.logMessage("TRIAL_%d CURRENT_%s" % (state.trial, cur), t.clk)
 
-            waitForAnyKey(clock, Text("Please plug into STIMULATOR.\n\nThen press any key."))
-            stimOnOff(log, pulseControl, clock, config)
+            waitForAnyKey(t.clk, Text("Please plug into STIMULATOR.\n\nThen press any key."))
+            stimOnOff(t.log, t.pulseControl, t.clk, config)
 
 
-        waitForAnyKey(clock, Text("Press any key to start trial."))
+        waitForAnyKey(t.clk, Text("Press any key to start trial."))
         flashStimulus(Text(""), duration=config.AFTER_STIM_QUESTION)
 
         ####### STUDY ######
-	video.clear("black")
+	t.vid.clear("black")
 
 	# Log the start of the study period
-	log.logMessage("STUDY_START\tTRIAL_%d"%(state.trial),clock)
+	t.log.logMessage("STUDY_START\tTRIAL_%d"%(state.trial),t.clk)
     
 	for pair in range(state.trial*trialconfig.NUM_PAIRS,
 			  (state.trial+1)*trialconfig.NUM_PAIRS):
 	    # Present the orienting stimulus
-	    clock.delay(trialconfig.DELAY_ORIENT,jitter=trialconfig.JITTER)
-	    state.trialData[pair].tOrientStudy = clock.get()
+	    t.clk.delay(trialconfig.DELAY_ORIENT,jitter=trialconfig.JITTER)
+	    state.trialData[pair].tOrientStudy = t.clk.get()
 	    stamp = flashStimulus(Text(trialconfig.ORIENTING_STUDY),
 				  duration=trialconfig.DURATION_ORIENT,
-				  clk=clock)
+				  clk=t.clk)
 	    # Log the presentation of the orienting stimulus
-	    log.logMessage("STUDY_ORIENT\tTRIAL_%d"%(state.trial),stamp)
+	    t.log.logMessage("STUDY_ORIENT\tTRIAL_%d"%(state.trial),stamp)
 
             # present the pair of words
-            clock.delay(trialconfig.DELAY_WORD,jitter=trialconfig.JITTER)
-            now = clock.get()
+            t.clk.delay(trialconfig.DELAY_WORD,jitter=trialconfig.JITTER)
+            now = t.clk.get()
             state.trialData[pair].tWord[0] = now
             state.trialData[pair].tWord[1] = now
             text = state.trialData[pair].word[0] + "\n\n" + state.trialData[pair].word[1]
             stamp = flashStimulus(Text(text),
                                   duration=trialconfig.DURATION_WORD,
-                                  clk=clock)
+                                  clk=t.clk)
             # Log the presentation of each word in the pair
-            log.logMessage("STUDY_PAIR_%d\tTRIAL_%d"%(pair, state.trial), stamp)
+            t.log.logMessage("STUDY_PAIR_%d\tTRIAL_%d"%(pair, state.trial), stamp)
 
         ######  TEST   ######
 	# Cued Recall
 
 	# Log the start of the trial period
-	log.logMessage("TEST_START\tTRIAL_%d"%(state.trial),clock)
+	t.log.logMessage("TEST_START\tTRIAL_%d"%(state.trial),t.clk)
     
 	# Loop through all the items in the list
 	for test in range(0,trialconfig.NUM_PAIRS):
@@ -442,52 +442,52 @@ def run(exp,config):
 	    fname = "%d_%d"%(state.trial,pair)
 	       
 	    # present the orienting stimulus
-	    clock.delay(trialconfig.DELAY_ORIENT)
+	    t.clk.delay(trialconfig.DELAY_ORIENT)
 	    stamp = flashStimulus(Text(trialconfig.ORIENTING_TEST),
 				  duration=trialconfig.DURATION_ORIENT,
-				  clk=clock)
-	    video.updateScreen(clock)
+				  clk=t.clk)
+	    t.vid.updateScreen(t.clk)
 	    # Log the presentation of the orienting stimulus
-	    log.logMessage("TEST_ORIENT\tTRIAL_%d"%(state.trial),stamp)
+	    t.log.logMessage("TEST_ORIENT\tTRIAL_%d"%(state.trial),stamp)
 
 	    # present the word
-	    clock.delay(trialconfig.DELAY_CUE)
-	    state.trialData[index].tCue = clock.get()
-	    probeHandle = video.showCentered(Text(probe))
-	    video.updateScreen(clock)
+	    t.clk.delay(trialconfig.DELAY_CUE)
+	    state.trialData[index].tCue = t.clk.get()
+	    probeHandle = t.vid.showCentered(Text(probe))
+	    t.vid.updateScreen(t.clk)
 	    # Log the presentation of the probe
-	    log.logMessage("TEST_PROBE_%d\tTRIAL%d"%(index,state.trial),stamp)
+	    t.log.logMessage("TEST_PROBE_%d\tTRIAL%d"%(index,state.trial),stamp)
 
 	    # Record
-	    (rec,timestamp) = audio.startRecording(fname,t=clock)
-	    log.logMessage("REC_START"%(),timestamp)
+	    (rec,timestamp) = t.aud.startRecording(fname,t=t.clk)
+	    t.log.logMessage("REC_START"%(),timestamp)
 
 	    # if we need to erase the cue, do so after a delay
 	    if(trialconfig.DURATION_CUE > 0):
-		clock.delay(trialconfig.DURATION_CUE)
-		video.unshow(probeHandle)
-		video.updateScreen(clock)
+		t.clk.delay(trialconfig.DURATION_CUE)
+		t.vid.unshow(probeHandle)
+		t.vid.updateScreen(t.clk)
 
    	    # record voice after recording for a specified time
 	    if(trialconfig.RECORD_LEN > 0):
-		clock.delay(trialconfig.RECORD_LEN)
+		t.clk.delay(trialconfig.RECORD_LEN)
 	    else:
-		waitForAnyKey(clk=clock)
+		waitForAnyKey(clk=t.clk)
 
    	    # clear the probe (if we haven't done so already)
 	    if(trialconfig.DURATION_CUE <= 0):
-		video.unshow(probeHandle)
-		video.updateScreen(clock)
+		t.vid.unshow(probeHandle)
+		t.vid.updateScreen(t.clk)
 
-	    (rec,timestamp) = audio.stopRecording(clock)
-	    log.logMessage("REC_END"%(),timestamp)
+	    (rec,timestamp) = t.aud.stopRecording(t.clk)
+	    t.log.logMessage("REC_END"%(),timestamp)
 
 	# Save the State
 	exp.saveState(state,trial=state.trial+1)
         #get the state
 	state = exp.restoreState()
 
-    waitForAnyKey(clock,Text("You have finished.\n"+
+    waitForAnyKey(t.clk,Text("You have finished.\n"+
 			     "Please inform the experimenter"))
 
 
@@ -569,6 +569,19 @@ def textInput(screenText, video, keyboard, clock):
                 return rstr
 
 
+class Tracks:
+    def __init__(self, config):
+        self.vid = VideoTrack("video")
+        flashStimulus(Text(""), duration=10) #hack to initialize video so PulseThread constructor won't fail                                                         
+        self.aud = AudioTrack("audio")
+        self.key = KeyTrack("keyboard")
+        self.log = LogTrack("session")
+        self.clk = PresentationClock()
+        self.eeg = EEGTrack("eeg", autoStart=False)
+        self.eeg.startService()
+        self.eeg.logall = True
+        self.pulseControl = PulseThread(self.eeg, config)
+
 
 # only do this if the experiment is run as a stand-alone program 
 #(not imported as a library)...
@@ -585,9 +598,11 @@ if __name__ == "__main__":
     # get the subject configuration
     config = exp.getConfig()
 
+    t = Tracks(config)
+
     # if there was no saved state, run the prepare function
     if not exp.restoreState():
         prepare(exp, config)
 
     # now run the subject
-    run(exp, config)
+    run(exp, config, t)
