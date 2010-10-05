@@ -101,6 +101,7 @@ class TrialData:
 	self.word.append('')
 	self.cueOrder = -1
 	self.reused = -1
+        self.stimOdds = False #for each trial, should we stim odd or even study words?
 	
 
 
@@ -189,7 +190,7 @@ def prepare(exp,config):
     delay_cue = config.DELAY_CUE
     duration_cue = config.DURATION_CUE
 
-    min_corr_diff = config.MIN_CORR_DIFF
+    min_corr_diff = config.MIN_CORR_DIFF        
 
     # Make sure that there are an even number of pairs within a trial.
     # Necessary because half of the pairs use interference and half do not.
@@ -248,6 +249,8 @@ def prepare(exp,config):
 
     # For each trial
     for trial in range (0,num_trials):
+        trialData[trial].stimOdds = random.choice([True, False])
+
 	# Setup interference. Half of the pairs in each list (except the
 	# first) use interference from a previous list
 	if((trial!=0) and (use_interference == 1)):
@@ -342,20 +345,6 @@ def run(exp,config,t):
 
     # get session specific configuration
     trialconfig = config.sequence(state.trial)
-
-#     # create tracks...
-#     video = VideoTrack("video")
-#     flashStimulus(Text(""), duration=10) #hack to initialize video so PulseThread constructor won't fail
-#     audio = AudioTrack("audio")
-#     keyboard = KeyTrack("keyboard")
-#     log = LogTrack("session")
-#     eeg = EEGTrack("eeg", autoStart=False)
-#     eeg.startService()
-#     eeg.logall = True
-#     pulseControl = PulseThread(eeg, config)
-
-#     # create a PresentationClock to handle timing
-#     clock = PresentationClock()
 
     # present the instructions
     t.vid.clear('black')
