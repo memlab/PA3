@@ -428,7 +428,7 @@ def run(exp,config,t):
 	    probe = "%s"%(state.trialData[index].word[direction])
 
 	    # create the filename for output
-	    fname = "%d_%d"%(state.trial,pair)
+	    fname = "session_RUN/%d_%d"%(state.trial,pair)
 	       
 	    # present the orienting stimulus
 	    t.clk.delay(trialconfig.DELAY_ORIENT)
