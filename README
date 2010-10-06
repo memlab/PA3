@@ -23,6 +23,13 @@ activation.
 
 2. RUNNING PA2
 
+*********
+PA3 Update: looking at old data on rhino it appears both the easy
+and regular lists have been used in the past. For example:
+/data1/eeg/group2/BW002/behavioral/pa2/data/21/subdat.csv
+/data1/eeg/group2/BW002/behavioral/pa2/data/22/subdat.csv
+*********
+
 First check to see that the appropriate links for your language are 
 made in the txt/ directory. For example, if running in Germany, 
 'nounpool.txt' should be a link to 'nounpool_german.txt', and 'intro.txt'
