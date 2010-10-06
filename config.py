@@ -53,7 +53,8 @@ DURATION_ORIENT=300	# duration of the orienting stimulus
 
 DELAY_WORD=750	        # delay before presentation of a word
 
-DURATION_WORD=1400	# duration of presentation of a word
+#PA3 changes to 2500
+DURATION_WORD=2500	# duration of presentation of a word
 
 DELAY_CUE=750	        # delay before presentation of the cue
 
