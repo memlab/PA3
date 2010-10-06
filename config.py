@@ -31,6 +31,7 @@ NUM_TRIALS=25           # number of trials total (must be odd)
 
 MIN_SPACING=2 	        # min # of items between study and test. 
 			# must be less than half of NUM_PAIRS
+                        # PA3: Mike says 2 or 1 are possible, 2 should be default
 
 USE_INTERFERENCE=0	# use interference when constructing lists?
 
