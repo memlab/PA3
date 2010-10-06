@@ -9,10 +9,8 @@
   the first or second word, and asked to recall 
   the matching word from the pair. Please speak 
   your response into the microphone.  If you cannot 
-  remember the word, say "pass". After you say the
-  word or "pass," hit the space bar to proceed to
-  the next word.
- 
+  remember the word, say "pass".
+
   You will begin with one practice round, which will 
   allow you to become familiar with the task.
  
