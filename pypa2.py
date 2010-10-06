@@ -52,6 +52,9 @@ class PulseThread:
             self.pulseCount = 0
 
     def startPulses(self, clock = None):
+        if (self.pulseLen * self.maxPulses * 2) > 10000:
+            print "you are trying to stim for longer than 10 secons. not allowed!"
+            sys.exit(1)
         if isinstance(clock, PresentationClock):
             (timeInterval, returnValue) = timing.timedCall(clock.get(), self.startPulses)
         elif clock and not isinstance(clock, PresentationClock):
