@@ -361,6 +361,7 @@ def run(exp,config,t):
     instruct(trialconfig.INTRO_FILE,clk=t.clk)
 
     while (state.trial < trialconfig.NUM_TRIALS):
+#         print
         stimTrial = waitForYKey("Is this a stim trial?\nPress 'y' for yes, any other key for no.")
         if stimTrial:
             msg = "Okay this IS a stim trial"
@@ -409,6 +410,7 @@ def run(exp,config,t):
             state.trialData[pair].tWord[0] = now
             state.trialData[pair].tWord[1] = now
             text = state.trialData[pair].word[0] + "\n\n" + state.trialData[pair].word[1]
+#             print "trial " + str(state.trial) + " study: " + state.trialData[pair].word[0] + " " + state.trialData[pair].word[1]
             stamp = flashStimulus(Text(text),
                                   duration=trialconfig.DURATION_WORD,
                                   clk=t.clk)
@@ -436,6 +438,7 @@ def run(exp,config,t):
 
  	    # create the probe
 	    probe = "%s"%(state.trialData[index].word[direction])
+#             print "trial " + str(state.trial) + " cue: " + probe
 
 	    # create the filename for output
 	    fname = "session_RUN/%d_%d"%(state.trial,pair)
