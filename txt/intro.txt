@@ -1,18 +1,1 @@
-  In this experiment you will study lists of 
-  word pairs presented on the screen. First you
-  will see a row of X's (XXXXXXX), then the pair
-  will be presented.
-
-  Following the presentation of the pairs you will
-  be presented with a series of question marks 
-  (??????) and then one word from the list, either 
-  the first or second word, and asked to recall 
-  the matching word from the pair. Please speak 
-  your response into the microphone.  If you cannot 
-  remember the word, say "pass".
-
-  You will begin with one practice round, which will 
-  allow you to become familiar with the task.
- 
-  If you have any questions about these instructions, 
-  ask the experimenter now.
+intro_english.txt
