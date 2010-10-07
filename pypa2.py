@@ -349,6 +349,13 @@ def run(exp,config,t):
     # get session specific configuration
     trialconfig = config.sequence(state.trial)
 
+    # check if mic is recording
+    t.vid.clear('black')
+    soundgood = micTest(2000, 1.0)
+    if not soundgood:
+        print "mic not working"
+        return
+
     # present the instructions
     t.vid.clear('black')
     instruct(trialconfig.INTRO_FILE,clk=t.clk)
