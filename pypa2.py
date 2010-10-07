@@ -393,8 +393,8 @@ def run(exp,config,t):
 	# Log the start of the study period
 	t.log.logMessage("STUDY_START\tTRIAL_%d"%(state.trial),t.clk)
     
-	for pair in range(state.trial*trialconfig.NUM_PAIRS,
-			  (state.trial+1)*trialconfig.NUM_PAIRS):
+	for pairNum, pair in enumerate(range(state.trial*trialconfig.NUM_PAIRS,
+			  (state.trial+1)*trialconfig.NUM_PAIRS)):
 	    # Present the orienting stimulus
 	    t.clk.delay(trialconfig.DELAY_ORIENT,jitter=trialconfig.JITTER)
 	    state.trialData[pair].tOrientStudy = t.clk.get()
@@ -411,6 +411,14 @@ def run(exp,config,t):
             state.trialData[pair].tWord[1] = now
             text = state.trialData[pair].word[0] + "\n\n" + state.trialData[pair].word[1]
 #             print "trial " + str(state.trial) + " study: " + state.trialData[pair].word[0] + " " + state.trialData[pair].word[1]
+
+            #STIM NOW for config.STUDY_STIM_DURATION
+            if stimTrial:
+                if (state.trialData[state.trial].stimOdds and pairNum % 2 == 1) or ((not state.trialData[state.trial].stimOdds) and pairNum % 2 == 0):
+                    duration = trialconfig.STUDY_STIM_DURATION
+                    t.log.logMessage("BEGIN_STUDY_STIM DURATION_%d\tTRIAL_%d" % (duration, state.trial))
+                    stim(duration, t.pulseControl, t.clk, trialconfig)
+
             stamp = flashStimulus(Text(text),
                                   duration=trialconfig.DURATION_WORD,
                                   clk=t.clk)
@@ -495,24 +503,22 @@ def run(exp,config,t):
 
 
 
+def stim(duration, pulseControl, clock, config):
+    pulseControl.pulseLen = (1000 / config.STIM_PULSE_FREQ) / 2
+    pulseControl.maxPulses = (duration / pulseControl.pulseLen) / 2
+    pulseControl.startPulses(clock)
+
 def stimOnOff(log, pulseControl, clock, config):
     flashStimulus(Text("Starting test stim cycle"), duration=3000)
     for i in range(config.PULSE_CYCLES):
         log.logMessage("PULSE_CYCLE_START", clock)
-
-        pulseControl.pulseLen = (1000 / config.STIM_PULSE_FREQ) / 2
-        pulseControl.maxPulses = (config.CYCLE_PULSE_ON_DURATION / pulseControl.pulseLen) / 2
-        pulseControl.startPulses(clock)
-
+        stim(config.CYCLE_PULSE_ON_DURATION, pulseControl, clock, config)
         flashStimulus(Text("Background stim #" + str(i)), duration=config.CYCLE_PULSE_ON_DURATION + config.CYCLE_PULSE_OFF_DURATION)
 
 def sync(log, pulseControl, clock, config):
     log.logMessage("START_SYNC_STIMS_AFTER")
     for i in range(config.SYNC_DURATION_SECONDS):
-        pulseControl.pulseLen = (1000 / config.STIM_PULSE_FREQ) / 2
-        pulseControl.maxPulses = 1
-        pulseControl.startPulses(clock)
-
+        stim(10, pulseControl, clock, config)
         flashStimulus(Text(str(config.SYNC_DURATION_SECONDS - i)), duration=1000, jitter=config.JITTER)
 
 
