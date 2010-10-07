@@ -1,53 +1,224 @@
-trial 0 study: JERSEY PROJECT
-trial 0 study: SERVICE SHIPPING
-trial 0 study: BUSHEL BULLET
-trial 0 study: BUTTER YELLOW
-trial 0 cue: BUSHEL
-trial 0 cue: JERSEY
-trial 0 cue: SHIPPING
-trial 0 cue: BUTTER
+trial 0 study: TICKET MOTOR
+trial 0 study: MACHINE BASIS
+trial 0 study: FARMER HELMET
+trial 0 study: MEANING AUTUMN
+trial 0 cue: BASIS
+trial 0 cue: AUTUMN
+trial 0 cue: FARMER
+trial 0 cue: TICKET
 
-trial 1 study: MATTER SERVANT
-trial 1 study: SCHOLAR MIXTURE
-trial 1 study: ELBOW PURSUIT
-trial 1 study: DEGREE MEANING
-trial 1 cue: ELBOW
-trial 1 cue: SCHOLAR
-trial 1 cue: MATTER
-trial 1 cue: MEANING
+trial 1 study: COLOR HARNESS
+trial 1 study: PARTY BASIN
+trial 1 study: CUSTOM INSECT
+trial 1 study: SCHOLAR ASPECT
+trial 1 cue: COLOR
+trial 1 cue: ASPECT
+trial 1 cue: PARTY
+trial 1 cue: CUSTOM
 
-trial 2 study: WEAKNESS PARENT
-trial 2 study: AUTHOR PARCEL
-trial 2 study: BUSINESS CUSTOM
-trial 2 study: MOISTURE LUNCHEON
-trial 2 cue: AUTHOR
-trial 2 cue: PARENT
-trial 2 cue: BUSINESS
-trial 2 cue: MOISTURE
+trial 2 study: MILLION SURVEY
+trial 2 study: SANDWICH DOUBLE
+trial 2 study: LAWYER ISLAND
+trial 2 study: SILVER PUPIL
+trial 2 cue: DOUBLE
+trial 2 cue: PUPIL
+trial 2 cue: MILLION
+trial 2 cue: LAWYER
 
-trial 3 study: SHEPHERD FLAVOR
-trial 3 study: TOTAL SHOWER
-trial 3 study: MISSION SEASON
-trial 3 study: SPIDER PONY
-trial 3 cue: FLAVOR
-trial 3 cue: SPIDER
-trial 3 cue: MISSION
-trial 3 cue: TOTAL
+trial 3 study: MIXTURE COMMERCE
+trial 3 study: SEASON DISTANCE
+trial 3 study: LEARNING PRODUCT
+trial 3 study: COMRADE REFUGE
+trial 3 cue: COMMERCE
+trial 3 cue: SEASON
+trial 3 cue: LEARNING
+trial 3 cue: REFUGE
 
-trial 4 study: CONQUEST SUGAR
-trial 4 study: SUNSET BASKET
-trial 4 study: HUSBAND PERFUME
-trial 4 study: CANOE MONEY
-trial 4 cue: CONQUEST
-trial 4 cue: PERFUME
-trial 4 cue: MONEY
-trial 4 cue: BASKET
+trial 4 study: PITCHER SPIDER
+trial 4 study: SICKNESS CHIMNEY
+trial 4 study: DIET HERALD
+trial 4 study: MOMENT AGENT
+trial 4 cue: SICKNESS
+trial 4 cue: SPIDER
+trial 4 cue: HERALD
+trial 4 cue: MOMENT
 
-trial 5 study: JEWEL ARTIST
-trial 5 study: RESOURCE DISTRICT
-trial 5 study: PIGEON INSECT
-trial 5 study: MAYOR CORNER
-trial 5 cue: INSECT
-trial 5 cue: CORNER
-trial 5 cue: RESOURCE
-trial 5 cue: ARTIST
+trial 5 study: MISSION SLIPPER
+trial 5 study: SILENCE ARRAY
+trial 5 study: COURAGE DIAMOND
+trial 5 study: BLESSING COLLEGE
+trial 5 cue: DIAMOND
+trial 5 cue: SILENCE
+trial 5 cue: BLESSING
+trial 5 cue: MISSION
+
+trial 6 study: DANGER RESEARCH
+trial 6 study: NEEDLE FATHER
+trial 6 study: CONGRESS WRINKLE
+trial 6 study: PACKAGE TUNNEL
+trial 6 cue: DANGER
+trial 6 cue: WRINKLE
+trial 6 cue: PACKAGE
+trial 6 cue: NEEDLE
+
+trial 7 study: RIFLE NUMBER
+trial 7 study: FIGURE WINTER
+trial 7 study: ROBBER FOREST
+trial 7 study: SERVANT LEADER
+trial 7 cue: ROBBER
+trial 7 cue: FIGURE
+trial 7 cue: SERVANT
+trial 7 cue: NUMBER
+
+trial 8 study: COUNTRY PAINTER
+trial 8 study: MEADOW SULPHUR
+trial 8 study: DETAIL DAUGHTER
+trial 8 study: MUSIC OBJECT
+trial 8 cue: DAUGHTER
+trial 8 cue: OBJECT
+trial 8 cue: SULPHUR
+trial 8 cue: PAINTER
+
+trial 9 study: COMPOUND RECORD
+trial 9 study: VALLEY JUDGMENT
+trial 9 study: FEATHER LECTURE
+trial 9 study: IMAGE CORNER
+trial 9 cue: LECTURE
+trial 9 cue: VALLEY
+trial 9 cue: COMPOUND
+trial 9 cue: IMAGE
+
+trial 10 study: MOUNTAIN TEACHER
+trial 10 study: DARKNESS COLUMN
+trial 10 study: BANNER MARRIAGE
+trial 10 study: ANGLE ONION
+trial 10 cue: BANNER
+trial 10 cue: ONION
+trial 10 cue: DARKNESS
+trial 10 cue: MOUNTAIN
+
+trial 11 study: FURY ELDER
+trial 11 study: HABIT JERSEY
+trial 11 study: BELIEF THEORY
+trial 11 study: EVENT LUNCHEON
+trial 11 cue: ELDER
+trial 11 cue: BELIEF
+trial 11 cue: JERSEY
+trial 11 cue: EVENT
+
+trial 12 study: DEGREE SHIPPING
+trial 12 study: OLIVE PLAYER
+trial 12 study: LAUGHTER TRAFFIC
+trial 12 study: READING CONQUEST
+trial 12 cue: PLAYER
+trial 12 cue: SHIPPING
+trial 12 cue: READING
+trial 12 cue: TRAFFIC
+
+trial 13 study: PAPER MOTIVE
+trial 13 study: CONCERT WEAPON
+trial 13 study: BOTTOM VILLAGE
+trial 13 study: SUGAR WIDOW
+trial 13 cue: VILLAGE
+trial 13 cue: PAPER
+trial 13 cue: WEAPON
+trial 13 cue: WIDOW
+
+trial 14 study: ARTIST BERRY
+trial 14 study: DINNER MONEY
+trial 14 study: STORY RECEIPT
+trial 14 study: LIQUOR PARENT
+trial 14 cue: MONEY
+trial 14 cue: STORY
+trial 14 cue: BERRY
+trial 14 cue: PARENT
+
+trial 15 study: PARCEL BLANKET
+trial 15 study: PRAYER LION
+trial 15 study: SPEAKER PURSUIT
+trial 15 study: ERROR KINDNESS
+trial 15 cue: PURSUIT
+trial 15 cue: LION
+trial 15 cue: BLANKET
+trial 15 cue: ERROR
+
+trial 16 study: CANAL MISCHIEF
+trial 16 study: CASTLE ACRE
+trial 16 study: TABLE ANCHOR
+trial 16 study: WEDDING LETTER
+trial 16 cue: MISCHIEF
+trial 16 cue: WEDDING
+trial 16 cue: CASTLE
+trial 16 cue: ANCHOR
+
+trial 17 study: UNCLE SUCCESS
+trial 17 study: HATRED FORTUNE
+trial 17 study: COTTAGE JOURNAL
+trial 17 study: PASSAGE MUSCLE
+trial 17 cue: UNCLE
+trial 17 cue: FORTUNE
+trial 17 cue: JOURNAL
+trial 17 cue: PASSAGE
+
+trial 18 study: COFFEE SINGLE
+trial 18 study: CIRCLE PONY
+trial 18 study: CONTEST NOVEL
+trial 18 study: ROBIN CAREER
+trial 18 cue: NOVEL
+trial 18 cue: COFFEE
+trial 18 cue: CAREER
+trial 18 cue: CIRCLE
+
+trial 19 study: CLOTHING DUTY
+trial 19 study: CHAIRMAN PASSION
+trial 19 study: EFFECT CANVAS
+trial 19 study: DEALER PATIENCE
+trial 19 cue: PASSION
+trial 19 cue: DUTY
+trial 19 cue: DEALER
+trial 19 cue: CANVAS
+
+trial 20 study: KITTEN FLAVOR
+trial 20 study: ODOR PLATFORM
+trial 20 study: BARGAIN CHAPTER
+trial 20 study: DESPAIR EXCESS
+trial 20 cue: ODOR
+trial 20 cue: DESPAIR
+trial 20 cue: KITTEN
+trial 20 cue: CHAPTER
+
+trial 21 study: CABIN AFFAIR
+trial 21 study: MARBLE PILLOW
+trial 21 study: CHANNEL RUBBER
+trial 21 study: MOISTURE LEVEL
+trial 21 cue: RUBBER
+trial 21 cue: PILLOW
+trial 21 cue: AFFAIR
+trial 21 cue: MOISTURE
+
+trial 22 study: FACTOR ECHO
+trial 22 study: SENTENCE WAGON
+trial 22 study: POLICE LIQUID
+trial 22 study: MAYOR CHERRY
+trial 22 cue: WAGON
+trial 22 cue: MAYOR
+trial 22 cue: FACTOR
+trial 22 cue: POLICE
+
+trial 23 study: SERIES CARRIAGE
+trial 23 study: LADY MERIT
+trial 23 study: RAILWAY GARDEN
+trial 23 study: BABY SPIRIT
+trial 23 cue: MERIT
+trial 23 cue: GARDEN
+trial 23 cue: BABY
+trial 23 cue: SERIES
+
+trial 24 study: POEM CRYSTAL
+trial 24 study: SISTER INSTANT
+trial 24 study: WITNESS SYSTEM
+trial 24 study: CARPET CANOE
+trial 24 cue: CRYSTAL
+trial 24 cue: CARPET
+trial 24 cue: WITNESS
+trial 24 cue: INSTANT
