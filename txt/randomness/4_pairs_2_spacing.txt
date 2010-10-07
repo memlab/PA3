@@ -1,0 +1,53 @@
+trial 0 study: REASON SANDWICH
+trial 0 study: SHEPHERD FATHER
+trial 0 study: PLATFORM SPIDER
+trial 0 study: ANGEL CONTRACT
+trial 0 cue: SANDWICH
+trial 0 cue: PLATFORM
+trial 0 cue: FATHER
+trial 0 cue: ANGEL
+
+trial 1 study: DOLLAR CARPET
+trial 1 study: MOUNTAIN FINGER
+trial 1 study: NOVEL ODOR
+trial 1 study: TABLE COMPOUND
+trial 1 cue: FINGER
+trial 1 cue: ODOR
+trial 1 cue: TABLE
+trial 1 cue: CARPET
+
+trial 2 study: ROBBER CUSTOM
+trial 2 study: ARRAY INTEREST
+trial 2 study: PRISON ARTIST
+trial 2 study: WINDOW MISCHIEF
+trial 2 cue: ROBBER
+trial 2 cue: INTEREST
+trial 2 cue: WINDOW
+trial 2 cue: ARTIST
+
+trial 3 study: BERRY COMPASS
+trial 3 study: DEALER ANGLE
+trial 3 study: PASSION FAILURE
+trial 3 study: PRODUCT MIXTURE
+trial 3 cue: ANGLE
+trial 3 cue: PASSION
+trial 3 cue: PRODUCT
+trial 3 cue: COMPASS
+
+trial 4 study: WAGON DIAMOND
+trial 4 study: LOVER HELMET
+trial 4 study: UNCLE CONTEST
+trial 4 study: STATION ENGINE
+trial 4 cue: WAGON
+trial 4 cue: UNCLE
+trial 4 cue: ENGINE
+trial 4 cue: LOVER
+
+trial 5 study: ORANGE MODEL
+trial 5 study: RECORD SURVEY
+trial 5 study: COUNTY PRAIRIE
+trial 5 study: PROGRAM VALUE
+trial 5 cue: SURVEY
+trial 5 cue: ORANGE
+trial 5 cue: COUNTY
+trial 5 cue: PROGRAM
