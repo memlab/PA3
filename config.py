@@ -7,7 +7,11 @@ AFTER_STIM_QUESTION = 3000
 #how man SECONDS should the sync period be
 SYNC_DURATION_SECONDS = 60
 
-#stim parameters                                                                                                                        #how long should the mini-pulses go on for in the 10 x 2 on 10 off cycle                                                                #Brad - 2000
+#stim parameters
+STUDY_STIM_DURATION = 3000
+
+#how long should the mini-pulses go on for in the 10 x 2 on 10 off cycle
+# Brad - 2000
 CYCLE_PULSE_ON_DURATION = 2000
 #how long should the mini-pulses go off for in the 10 x 2 on 10 off cycle
 #Brad - 10000
@@ -41,7 +45,13 @@ MIN_CORRELATION=-.1
 
 MAX_CORRELATION=0.3
 
-RECORD_LEN=0    	# length of time to record subjects response 
+DURATION_CUE=3000	# PA3: KEEP THIS THE SAME AS RECORD_LEN
+                        # durzation of presentation of the cue (zero indicates 
+                        # the the probe should be left on until the 
+                        # subject makes a response)
+
+RECORD_LEN=DURATION_CUE # PA3: KEEP THIS THE SAME AS DURATION_CUE
+                        # length of time to record subjects response 
                         # (zero indicates record until button is pressed)
 
 
@@ -58,9 +68,6 @@ DURATION_WORD=2500	# duration of presentation of a word
 
 DELAY_CUE=750	        # delay before presentation of the cue
 
-DURATION_CUE=0	        # durzation of presentation of the cue (zero indicates 
-                        # the the probe should be left on until the 
-                        # subject makes a response)
 
 # The following parameters were taken from the config.ini file attained
 # with the orinal py2 experiment
