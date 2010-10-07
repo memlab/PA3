@@ -1,1 +1,1 @@
-nounpool_english.txt
+nounpool_english_easy.txt
