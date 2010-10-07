@@ -35,7 +35,7 @@ MIN_SPACING=2 	        # min # of items between study and test.
 
 USE_INTERFERENCE=0	# use interference when constructing lists?
 
-USE_CORRELATION=0	# use correlations when constructing pairs?
+USE_CORRELATION=1	# use correlations when constructing pairs?
 
 MIN_CORRELATION=-.1
 
