@@ -1,0 +1,53 @@
+trial 0 study: JERSEY PROJECT
+trial 0 study: SERVICE SHIPPING
+trial 0 study: BUSHEL BULLET
+trial 0 study: BUTTER YELLOW
+trial 0 cue: BUSHEL
+trial 0 cue: JERSEY
+trial 0 cue: SHIPPING
+trial 0 cue: BUTTER
+
+trial 1 study: MATTER SERVANT
+trial 1 study: SCHOLAR MIXTURE
+trial 1 study: ELBOW PURSUIT
+trial 1 study: DEGREE MEANING
+trial 1 cue: ELBOW
+trial 1 cue: SCHOLAR
+trial 1 cue: MATTER
+trial 1 cue: MEANING
+
+trial 2 study: WEAKNESS PARENT
+trial 2 study: AUTHOR PARCEL
+trial 2 study: BUSINESS CUSTOM
+trial 2 study: MOISTURE LUNCHEON
+trial 2 cue: AUTHOR
+trial 2 cue: PARENT
+trial 2 cue: BUSINESS
+trial 2 cue: MOISTURE
+
+trial 3 study: SHEPHERD FLAVOR
+trial 3 study: TOTAL SHOWER
+trial 3 study: MISSION SEASON
+trial 3 study: SPIDER PONY
+trial 3 cue: FLAVOR
+trial 3 cue: SPIDER
+trial 3 cue: MISSION
+trial 3 cue: TOTAL
+
+trial 4 study: CONQUEST SUGAR
+trial 4 study: SUNSET BASKET
+trial 4 study: HUSBAND PERFUME
+trial 4 study: CANOE MONEY
+trial 4 cue: CONQUEST
+trial 4 cue: PERFUME
+trial 4 cue: MONEY
+trial 4 cue: BASKET
+
+trial 5 study: JEWEL ARTIST
+trial 5 study: RESOURCE DISTRICT
+trial 5 study: PIGEON INSECT
+trial 5 study: MAYOR CORNER
+trial 5 cue: INSECT
+trial 5 cue: CORNER
+trial 5 cue: RESOURCE
+trial 5 cue: ARTIST
