@@ -503,7 +503,15 @@ def run(exp,config,t):
 
 
 
-def stim(duration, pulseControl, clock, config):
+def stim(duration, pulseControl, clock, config, notStimmingAHuman=False):
+    global lastStimEnd
+    if not notStimmingAHuman:
+        elapsed = timing.now() - lastStimEnd
+        print "elpased: " + str(elapsed)
+        if elapsed < 2000:
+            print "you have requested two stims less than 2 seconds apart"
+            sys.exit()
+    lastStimEnd = timing.now() + duration
     pulseControl.pulseLen = (1000 / config.STIM_PULSE_FREQ) / 2
     pulseControl.maxPulses = (duration / pulseControl.pulseLen) / 2
     pulseControl.startPulses(clock)
@@ -518,7 +526,7 @@ def stimOnOff(log, pulseControl, clock, config):
 def sync(log, pulseControl, clock, config):
     log.logMessage("START_SYNC_STIMS_AFTER")
     for i in range(config.SYNC_DURATION_SECONDS):
-        stim(10, pulseControl, clock, config)
+        stim(10, pulseControl, clock, config, notStimmingAHuman=True)
         flashStimulus(Text(str(config.SYNC_DURATION_SECONDS - i)), duration=1000, jitter=config.JITTER)
 
 
@@ -612,5 +620,6 @@ if __name__ == "__main__":
     if not exp.restoreState():
         prepare(exp, config)
 
+    lastStimEnd = 0 # safety variable
     # now run the subject
     run(exp, config, t)
