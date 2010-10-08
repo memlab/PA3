@@ -24,6 +24,9 @@ PULSE_CYCLES = 10
 #PyFR_Stim - 100
 STIM_PULSE_FREQ = 100
 
+STOP_BEEP_FREQ=400
+STOP_BEEP_DUR=300
+STOP_BEEP_RISE_FALL=100
 
 #---- from PA2 ----#
 # The following parameters were taken from the config.ini file attained
