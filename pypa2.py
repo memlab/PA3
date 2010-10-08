@@ -393,8 +393,8 @@ def run(exp,config,t):
 	# Log the start of the study period
 	t.log.logMessage("STUDY_START\tTRIAL_%d"%(state.trial),t.clk)
     
-	for pairNum, pair in enumerate(range(state.trial*trialconfig.NUM_PAIRS,
-			  (state.trial+1)*trialconfig.NUM_PAIRS)):
+	for pair in range(state.trial*trialconfig.NUM_PAIRS,
+			  (state.trial+1)*trialconfig.NUM_PAIRS):
 	    # Present the orienting stimulus
 	    t.clk.delay(trialconfig.DELAY_ORIENT,jitter=trialconfig.JITTER)
 	    state.trialData[pair].tOrientStudy = t.clk.get()
@@ -414,7 +414,7 @@ def run(exp,config,t):
 
             #STIM NOW for config.STUDY_STIM_DURATION
             if stimTrial:
-                if (state.trialData[state.trial].stimOdds and pairNum % 2 == 1) or ((not state.trialData[state.trial].stimOdds) and pairNum % 2 == 0):
+                if (state.trialData[state.trial].stimOdds and pair % 2 == 1) or ((not state.trialData[state.trial].stimOdds) and pair % 2 == 0):
                     duration = trialconfig.STUDY_STIM_DURATION
                     t.log.logMessage("BEGIN_STUDY_STIM DURATION_%d\tTRIAL_%d" % (duration, state.trial))
                     stim(duration, t.pulseControl, t.clk, trialconfig)
@@ -467,6 +467,13 @@ def run(exp,config,t):
 	    t.vid.updateScreen(t.clk)
 	    # Log the presentation of the probe
 	    t.log.logMessage("TEST_PROBE_%d\tTRIAL%d"%(index,state.trial),stamp)
+
+            if stimTrial:
+                if (state.trialData[state.trial].stimOdds and index % 2 ==1) or ((not state.trialData[state.trial].stimOdds) and index % 2 == 0):
+                    duration = trialconfig.CUE_STIM_DURATION
+                    t.log.logMessage("BEGIN_CUE_STIM DURATION_%d\tTRIAL_%d" % (duration, state.trial))
+                    stim(duration, t.pulseControl, t.clk, trialconfig)
+
 
 	    # Record
 	    (rec,timestamp) = t.aud.startRecording(fname,t=t.clk)

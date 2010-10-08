@@ -10,6 +10,8 @@ SYNC_DURATION_SECONDS = 60
 #stim parameters
 STUDY_STIM_DURATION = 3000
 
+CUE_STIM_DURATION=3000
+
 #how long should the mini-pulses go on for in the 10 x 2 on 10 off cycle
 # Brad - 2000
 CYCLE_PULSE_ON_DURATION = 2000
@@ -45,7 +47,7 @@ MIN_CORRELATION=-.1
 
 MAX_CORRELATION=0.3
 
-DURATION_CUE=3000	# PA3: KEEP THIS THE SAME AS RECORD_LEN
+DURATION_CUE=3000	# PA3: KEEP THIS THE SAME AS RECORD_LEN & CUE_STIM_DURATION
                         # durzation of presentation of the cue (zero indicates 
                         # the the probe should be left on until the 
                         # subject makes a response)
