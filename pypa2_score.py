@@ -115,25 +115,25 @@ def score(exp,config):
 		    state.trialData[position].correct = 1
 		    done=1
 		    log.logMessage("SCORE\tTRIAL_%d\tPAIR_%d\tCORRECT_YES"%
-				   (state.trial,pair))
+				   (state.scoreTrial,pair))
 		elif response == 'passkey':
 		    ## Read in what the subject actually said.
 		    state.trialData[position].correct = 3
 		    done=1
 		    log.logMessage("SCORE\tTRIAL_%d\tPAIR_%d\tCORRECT_PASS"%
-				   (state.trial,pair))
+				   (state.scoreTrial,pair))
 		elif response == 'no':
 		    ## 2=nearmiss, 4=error
 		    state.trialData[position].correct = 4
 		    done=1
 		    log.logMessage("SCORE\tTRIAL_%d\tPAIR_%d\tCORRECT_NO"%
-				   (state.trial,pair))
+				   (state.scoreTrial,pair))
 		elif response == 'miss':
 		    ## 2=nearmiss, 4=error
 		    state.trialData[position].correct = 2
 		    done=1
 		    log.logMessage("SCORE\tTRIAL_%d\tPAIR_%d\tCORRECT_NEARMISS"%
-				   (state.trial,pair))
+				   (state.scoreTrial,pair))
 		elif response == 'repeat':
 		    pass
 
