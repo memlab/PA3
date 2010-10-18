@@ -1,7 +1,7 @@
 function data = analyze_subject( sub, varargin ) 
 %
 % DATA = ANALYZE_SUBJECT( SUB [, USECORR, USEINCORR]) reads in
-% 'data/SUB/session_SAVE/subdat.csv' and returns a DATA structure with the following
+% 'data/SUB/session_SAVE/subdat-rt.csv' and returns a DATA structure with the following
 % fields:
 %
 % LL: List Length
@@ -32,7 +32,7 @@ if length(varargin) >= 2
 end
 
 % read in the data
-fname = sprintf('data/%s/session_SAVE/subdat.csv', sub);
+fname = sprintf('data/%s/session_SAVE/subdat-rt.csv', sub);
 [sp, pp, interference, direction, correct, rt] = ...
 textread(fname, '%d%d%d%d%d%d', 'commentstyle', 'matlab');
 
