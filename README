@@ -55,6 +55,9 @@ recorded by entering the 'Y' key.  The program will also recognize the
 word 'P' for pass, 'N' for no (or incorrect), and 'M' for near miss.  
 To listen to the response again, press the <enter> key.
 
+Then, using Penn TotalRecall mark the onset of the first word of each
+file in session_RUN.
+
 
 4. ANALYSIS
 
