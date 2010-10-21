@@ -34,7 +34,7 @@ STOP_BEEP_RISE_FALL=100
 
 JITTER=75	        # (+/- jitter) introduced to presentation timing
 
-NUM_PAIRS=6	        # number of pairs in each list (must be even)
+NUM_PAIRS=4	        # number of pairs in each list (must be even)
 
 NUM_TRIALS=25           # number of trials total (must be odd)
 
