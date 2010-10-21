@@ -1,7 +1,7 @@
-function events = trackball_events(session_dir, subject_id, session_number)
-%TRACKBALL_EVENTS   Create an events structure for a session of pyEPL trackball.
+function events = pypa3_events(session_dir, subject_id, session_number)
+%PYPA3_EVENTS   Create an events structure for a session of pyEPL pypa3.
 %
-%  events = trackball_events(session_dir, subject_id, session_number)
+%  events = pypa3_events(session_dir, subject_id, session_number)
 %
 %  INPUTS:
 %     session_dir:  path to the directory containing data for this session.
@@ -18,7 +18,7 @@ function events = trackball_events(session_dir, subject_id, session_number)
 %   subject_id = 'LTP031';
 %   session_number = 1;
 %   session_dir = '/data3/eeg/scalp/apem_e7_ltp/LTP031/session_0';
-%   events = trackball_events(session_dir, subject_id, session_number);
+%   events = pypa3_events(session_dir, subject_id, session_number);
 
 % input checks
 if ~exist('session_dir','var')
