@@ -5,8 +5,19 @@
 import os
 import os.path
 
+import config
+
 def validate():
-    subjects = map(lambda f: os.path.abspath(f), os.listdir('data'))
+    subjects = map(lambda s: os.getcwd() + os.sep + 'data' + os.sep + s, os.listdir('data'))
+    map(lambda s: validate_subject(s), subjects)
+
+def validate_subject(path):
+    print "validating: " + path
+    sesslog = open(path + os.sep + 'session.log', 'r').readlines()
+    sesslog = map(lambda s: s.rstrip(), sesslog)
+    sesslog = map(lambda s: s.split('\t'), sesslog)
+    print sesslog[0]
+    
     
 
 
