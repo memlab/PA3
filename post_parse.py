@@ -1,13 +1,27 @@
 #!/usr/bin/python
 from __future__ import with_statement
 
+#
+# Usage: post_parse.py SUBJECT_ID
+#
+# This will create a file subdat-rt.csv derived from subdat.csv, but with the
+# response-time data inserted. This is what the modified analyze_subject.m
+# script requires.
+#
+
+
 import glob
 import os.path
 import sys
 
-csv_file  = "data/yuvi/session_SAVE/subdat.csv"
-out_file   = open("data/yuvi/session_SAVE/subdat-rt.csv", 'w')
-parse_dir = "data/yuvi/session_RUN/"
+SUBJECT_ID = sys.argv[1]
+if not os.path.exists('data/' + SUBJECT_ID):
+    print 'subject ID not found!'
+    sys.exit(1)
+
+csv_file  = "data/" + SUBJECT_ID + "/session_SAVE/subdat.csv"
+out_file   = open("data/" + SUBJECT_ID + "/session_SAVE/subdat-rt.csv", 'w')
+parse_dir = "data/" + SUBJECT_ID + "/session_RUN/"
 ann_ext = ".tmp"
 
 def get_rt(trial_num, pair_num):
