@@ -452,10 +452,10 @@ def run(exp,config,t):
 	    # create the filename for output
 	    fname = "session_RUN/%d_%d"%(state.trial,pair)
 
-            # lstname = "data/me/session_RUN/" + str(state.trial) + '_' + str(pair) + '.lst'
-            # lst = open(lstname, 'w')
-            # lst.write(str('hello') + '\n') 
-            # lst.close()
+            lstname = "data/" + str(exp.options["subject"]) + "/session_RUN/" + str(state.trial) + '_' + str(pair) + '.lst'
+            lst = open(lstname, 'w')
+            lst.write(str(probe) + '\n') 
+            lst.close()
 
     
 
