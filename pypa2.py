@@ -323,6 +323,15 @@ def prepare(exp,config):
 	    trialData[position].word[wordNum] = text_pool.__getitem__(wordTwo)['name']
 	    trialData[position].pos[wordNum] = wordTwo
 	    pool_used[wordTwo] = 1
+
+
+    # print '#' * 12
+    # print '#' * 12
+    # for i, trial in enumerate(trialData):
+    #     lstname = "lsts/" + str(i) + '.lst'
+    #     lst = open(lstname, 'w')
+    #     lst.write(str(trial) + '\n') 
+    #     lst.close()
     
     exp.saveState(None,trialData=trialData,trial=0,scoreTrial=0)
 	
