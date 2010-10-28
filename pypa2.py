@@ -325,14 +325,6 @@ def prepare(exp,config):
 	    pool_used[wordTwo] = 1
 
 
-    # print '#' * 12
-    # print '#' * 12
-    # for i, trial in enumerate(trialData):
-    #     lstname = "lsts/" + str(i) + '.lst'
-    #     lst = open(lstname, 'w')
-    #     lst.write(str(trial) + '\n') 
-    #     lst.close()
-    
     exp.saveState(None,trialData=trialData,trial=0,scoreTrial=0)
 	
 
@@ -459,6 +451,14 @@ def run(exp,config,t):
 
 	    # create the filename for output
 	    fname = "session_RUN/%d_%d"%(state.trial,pair)
+
+            # lstname = "data/me/session_RUN/" + str(state.trial) + '_' + str(pair) + '.lst'
+            # lst = open(lstname, 'w')
+            # lst.write(str('hello') + '\n') 
+            # lst.close()
+
+    
+
 	       
 	    # present the orienting stimulus
 	    t.clk.delay(trialconfig.DELAY_ORIENT)
