@@ -410,7 +410,9 @@ def run(exp,config,t):
             now = t.clk.get()
             state.trialData[pair].tWord[0] = now
             state.trialData[pair].tWord[1] = now
-            text = state.trialData[pair].word[0] + "\n\n" + state.trialData[pair].word[1]
+            word1 = state.trialData[pair].word[0]
+            word2 = state.trialData[pair].word[1]
+            text =  word1 + "\n\n" + word2
 #             print "trial " + str(state.trial) + " study: " + state.trialData[pair].word[0] + " " + state.trialData[pair].word[1]
 
             #STIM NOW for config.STUDY_STIM_DURATION
@@ -424,7 +426,7 @@ def run(exp,config,t):
                                   duration=trialconfig.DURATION_WORD,
                                   clk=t.clk)
             # Log the presentation of each word in the pair
-            t.log.logMessage("STUDY_PAIR_%d\tTRIAL_%d"%(pair, state.trial), stamp)
+            t.log.logMessage("STUDY_PAIR_%d\tTRIAL_%d\tWORD1_%s\tWORD2_%s"%(pair, state.trial, word1, word2), stamp)
 
         ######  TEST   ######
 	# Cued Recall
