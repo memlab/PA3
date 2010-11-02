@@ -480,7 +480,7 @@ def run(exp,config,t):
 	    probeHandle = t.vid.showCentered(Text(probe))
 	    t.vid.updateScreen(t.clk)
 	    # Log the presentation of the probe
-	    t.log.logMessage("TEST_PROBE_%d\tTRIAL%d"%(index,state.trial),stamp)
+	    t.log.logMessage("TEST_PROBE_%d\tTRIAL%d\tPROBE_%s\tEXPECTING_%s\tDIRECTION_%d"%(index,state.trial, probe, expecting, direction),stamp)
 
             if stimTrial:
                 if (state.trialData[state.trial].stimOdds and index % 2 ==1) or ((not state.trialData[state.trial].stimOdds) and index % 2 == 0):
