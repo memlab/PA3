@@ -454,7 +454,12 @@ def run(exp,config,t):
 
             lstname = "data/" + str(exp.options["subject"]) + "/session_RUN/" + str(state.trial) + '_' + str(pair) + '.lst'
             lst = open(lstname, 'w')
-            lst.write(str(probe) + '\n') 
+            if direction == 1:
+                opposite_direction = 0
+            else:
+                opposite_direction = 1
+            expecting = state.trialData[index].word[opposite_direction]
+            lst.write(str(expecting) + '\n') 
             lst.close()
 
     
