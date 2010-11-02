@@ -3,6 +3,8 @@
 #import PyEPL symbols into this namespace:
 from pyepl.locals import *
 from pypa2 import TrialData
+import os
+import os.path
 
 def save_data(exp,config):
     '''
@@ -39,12 +41,24 @@ def save_data(exp,config):
 
     matlab_file.write("% serial_pos, probe_pos, interference(0,1), direction(0=F,1=B), correct(0,1)\n")
     for i in range(0, trialconfig.NUM_TRIALS * trialconfig.NUM_PAIRS):
+
+        # look at ann file to determine if participant got the word right. only the first word is considered, per Mike's instructions
+        cur_trial = i // trialconfig.NUM_PAIRS
+        cur_pair = i % trialconfig.NUM_PAIRS
+        ann_path = 'data/%s/session_RUN/%d_%d.ann' % (exp.getOptions()['subject'], cur_trial, cur_pair)
+        if not os.path.exists(ann_path):
+            print 'ann file missing: ' + ann_path
+            sys.exit(1)
+        ann_file = open(ann_path)
+        correct = 5
+        ann_file.close()
+
         matlab_file.write("%d\t%d\t%d\t%d\t%d\t%d\n"%
                           (state.trialData[i].presOrder,
                            state.trialData[i].cueOrder,
                            state.trialData[i].interference,
                            state.trialData[i].cueDir,
-                           state.trialData[i].correct,
+                           correct,
                            state.trialData[i].reactionTime))
 
     mrk_file.close()
