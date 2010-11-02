@@ -49,9 +49,11 @@ def save_data(exp,config):
         if not os.path.exists(ann_path):
             print 'ann file missing: ' + ann_path
             sys.exit(1)
-        ann_file = open(ann_path)
-        correct = 5
-        ann_file.close()
+        spoken_words = extract_words(ann_path)
+        if spoken_words[0] == 'dunno':
+            correct = 1
+        else:
+            correct = 0
 
         matlab_file.write("%d\t%d\t%d\t%d\t%d\t%d\n"%
                           (state.trialData[i].presOrder,
@@ -67,6 +69,23 @@ def save_data(exp,config):
     video.clear("black")
     waitForAnyKey(clock,Text("Data has been saved to\n" +
 			     "%s"%(matlab_name)))
+
+
+def extract_words(path):
+    words = []
+    lines = open(path, 'r').readlines()
+    for line in lines:
+        if line == None:
+            continue
+        elif line.startswith('#'):
+            continue
+        else:
+            columns = line.split('\t')
+            if len(columns) == 3:
+                words.append(columns[2].rstrip())
+            else:
+                continue
+    return words
 
     
 
