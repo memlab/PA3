@@ -1,11 +1,11 @@
 **********************************************************
 **********************************************************
 
-PA2 README
+PA3 README
 
   1. EXPERIMENTAL DESIGN
-  2. RUNNING PA2
-  3. SCORING THE DATA
+  2. RUNNING PA3
+  3. ANNOTATING THE DATA
   4. ANALYSIS
 
 **********************************************************
@@ -20,8 +20,10 @@ versus no interference, forward versus backward recall, and item
 versus associative encoding to try and elicit differences in brain
 activation.
 
+It is based on the older pypa2 design.
 
-2. RUNNING PA2
+
+2. RUNNING PA3
 
 *********
 PA3 Update: looking at old data on rhino it appears both the easy
@@ -33,8 +35,10 @@ and regular lists have been used in the past. For example:
 First check to see that the appropriate links for your language are 
 made in the txt/ directory. For example, if running in Germany, 
 'nounpool.txt' should be a link to 'nounpool_german.txt', and 'intro.txt'
-should be linked to 'intro_german.txt'. Once the proper links have been 
-configured, make sure that 'config.ini' has the configuration you desire.
+should be linked to 'intro_german.txt'. Likewise, 'nounpool.txt' should
+point to the desired noun pool file.
+Once the proper links have been configured, make sure that 'config.py' 
+has the configuration you desire.
 
 Then type,
 
@@ -46,18 +50,12 @@ The experimenter is required to hit a key after each subject response
 to proceed to the next trial.
 
 
-3. SCORING THE DATA
+3. ANNOTATING THE DATA
 
-  pythonw pypa2_score.py -s SUBJECT_ID
+Annotate the files in 'data/SUBJECT_ID/session_RUN' as you normall would.
+The wordpool file is whatever 'txt/nounpool.txt' points to.
 
-then enter subject number at the prompt. A correct response can be
-recorded by entering the 'Y' key.  The program will also recognize the
-word 'P' for pass, 'N' for no (or incorrect), and 'M' for near miss.  
-To listen to the response again, press the <enter> key.
-
-Then, using Penn TotalRecall mark the onset of the first word of each
-file in session_RUN.
-
+DO NOT ANNOTATE VOCALIZATIONS (e.g., "um"). Only annotate words.
 
 4. ANALYSIS
 
