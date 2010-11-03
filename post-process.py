@@ -37,12 +37,12 @@ def save_data(exp,config):
     mrk_name = data_dir + trialconfig.MARKER_FILE
     eeg_name = data_dir + trialconfig.BEHAV_FILE
     matlab_name = data_dir + trialconfig.MATLAB_FILE
-    events_name = data_dir + 'events.csv'
+    event_name = data_dir + 'events.csv'
 
     mrk_file = open(mrk_name,'w')
     eeg_file = open(eeg_name,'w')
     matlab_file = open(matlab_name,'w')
-    events_file = open(events_name, 'w')
+    event_file = open(event_name, 'w')
 
     matlab_file.write("% serial_pos\tprobe_pos\tinterference(0,1)\tdirection(0=F,1=B)\tcorrect(0,1)\tresponse time (ms)\n")
 
@@ -74,37 +74,39 @@ def save_data(exp,config):
 
 
         for el in event_fields:
+            towrite = None
             if el == 'subject':
-                pass
+                towrite = '?'
             elif el == 'session':
-                pass
+                towrite = '?'
             elif el == 'event-type':
-                pass
+                towrite = '?'
             elif el == 'session-no':
-                pass
+                towrite = '?'
             elif el == 'pair-no':
-                pass
+                towrite = '?'
             elif el == 'stimmed':
-                pass
+                towrite = '?'
             elif el == 'electrode-no':
-                pass
+                towrite = '?'
             elif el == 'study-word-1':
-                pass
+                towrite = '?'
             elif el == 'study-word-2':
-                pass
+                towrite = '?'
             elif el == 'probe-word':
-                pass
+                towrite = '?'
             elif el == 'reaction-time':
-                pass
+                towrite = '?'
             elif el == 'intrusion':
-                pass
+                towrite = '?'
             elif el == 'ms-time':
-                pass
+                towrite = '?'
             elif el == 'ms-offset':
-                pass
+                towrite = '?'
             else:
                 print 'unknown event field: ' + el
                 sys.exit(1)
+            event_file.write(towrite + '\t')
         event_file.write('\n')
 
         matlab_file.write("%d\t%d\t%d\t%d\t%d\t%d\n"%
@@ -118,9 +120,9 @@ def save_data(exp,config):
     mrk_file.close()
     eeg_file.close()
     matlab_file.close()
-    events_file.close()
+    event_file.close()
     video.clear("black")
-    waitForAnyKey(clock,Text("analyze_subject.m file:\n" + matlab_name + "\n\nevents file:\n" + events_name))
+    waitForAnyKey(clock,Text("analyze_subject.m file:\n" + matlab_name + "\n\nevent file:\n" + event_name))
 
 
 def get_rt(trial_num, pair_num):
