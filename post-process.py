@@ -71,6 +71,8 @@ def save_data(exp,config):
             opposite_direction = 0
         else:
             opposite_direction = 1
+
+        cue_word = state.trialData[i].word[direction]
         if first_word == state.trialData[i].word[opposite_direction]:
             correct = 1
         else:
@@ -94,13 +96,13 @@ def save_data(exp,config):
             elif el == 'electrode-no':
                 towrite = '?'
             elif el == 'study-word-1':
-                towrite = '?'
+                towrite = state.trialData[i].word[0]
             elif el == 'study-word-2':
-                towrite = '?'
+                towrite = state.trialData[i].word[1]
             elif el == 'probe-word':
-                towrite = '?'
+                towrite = cue_word
             elif el == 'reaction-time':
-                towrite = '?'
+                towrite = reaction_time
             elif el == 'intrusion':
                 towrite = '?'
             elif el == 'ms-time':
