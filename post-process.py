@@ -39,7 +39,7 @@ def save_data(exp,config):
     eeg_file = open(eeg_name,'w')
     matlab_file = open(matlab_name,'w')
 
-    matlab_file.write("% serial_pos, probe_pos, interference(0,1), direction(0=F,1=B), correct(0,1)\n")
+    matlab_file.write("% serial_pos\tprobe_pos\tinterference(0,1)\tdirection(0=F,1=B)\tcorrect(0,1)\tresponse time (ms)\n")
     for i in range(0, trialconfig.NUM_TRIALS * trialconfig.NUM_PAIRS):
 
         # look at ann file to determine if participant got the word right. only the first word is considered, per Mike's instructions
@@ -49,17 +49,20 @@ def save_data(exp,config):
         if not os.path.exists(ann_path):
             print 'ann file missing: ' + ann_path
             sys.exit(1)
-        spoken_words = extract_words(ann_path)
+        annotations = extract_annotations(ann_path)
+        first_word = annotations[0][1]
 
         direction = state.trialData[i].cueDir
         if direction == 1:
             opposite_direction = 0
         else:
             opposite_direction = 1
-        if spoken_words[0] == state.trialData[i].word[opposite_direction]:
+        if first_word == state.trialData[i].word[opposite_direction]:
             correct = 1
         else:
             correct = 0
+
+        reaction_time = -5
 
         matlab_file.write("%d\t%d\t%d\t%d\t%d\t%d\n"%
                           (state.trialData[i].presOrder,
@@ -67,7 +70,7 @@ def save_data(exp,config):
                            state.trialData[i].interference,
                            state.trialData[i].cueDir,
                            correct,
-                           state.trialData[i].reactionTime))
+                           reaction_time))
 
     mrk_file.close()
     eeg_file.close()
@@ -77,7 +80,7 @@ def save_data(exp,config):
 			     "%s"%(matlab_name)))
 
 
-def extract_words(path):
+def extract_annotations(path):
     words = []
     lines = open(path, 'r').readlines()
     for line in lines:
@@ -88,7 +91,7 @@ def extract_words(path):
         else:
             columns = line.split('\t')
             if len(columns) == 3:
-                words.append(columns[2].rstrip())
+                words.append([round(float(columns[0])), columns[2].rstrip()])
             else:
                 continue
     return words
