@@ -14,6 +14,9 @@ def save_data(exp,config):
     #get the state
     state = exp.restoreState()
 
+    global parse_dir
+    parse_dir = "data/" + exp.getOptions()['subject'] + "/session_RUN/"    
+
     # Set up scoring session
     exp.setSession("SAVE")
 
@@ -62,7 +65,7 @@ def save_data(exp,config):
         else:
             correct = 0
 
-        reaction_time = -5
+        reaction_time = get_rt(cur_trial, cur_pair)
 
         matlab_file.write("%d\t%d\t%d\t%d\t%d\t%d\n"%
                           (state.trialData[i].presOrder,
@@ -79,6 +82,18 @@ def save_data(exp,config):
     waitForAnyKey(clock,Text("Data has been saved to\n" +
 			     "%s"%(matlab_name)))
 
+
+def get_rt(trial_num, pair_num):
+    with open(parse_dir + str(trial_num) + "_" + str(pair_num) + ".ann") as f:
+        for line in f:
+            els = line.split('\t')
+            first = els[0]
+            try:
+                num = int(round(float(first)))
+                return num
+            except:
+                pass
+        return -1
 
 def extract_annotations(path):
     words = []
