@@ -55,8 +55,6 @@ to proceed to the next trial.
 Annotate the files in 'data/SUBJECT_ID/session_RUN' as you normall would.
 The wordpool file is whatever 'txt/nounpool.txt' points to.
 
-DO NOT ANNOTATE VOCALIZATIONS (e.g., "um"). Only annotate words.
-
 4. ANALYSIS
 
   pythonw post-process.py -s SUBJECT_ID
