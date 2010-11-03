@@ -15,7 +15,9 @@ def save_data(exp,config):
     state = exp.restoreState()
 
     global parse_dir
-    parse_dir = "data/" + exp.getOptions()['subject'] + "/session_RUN/"    
+    global subject
+    subject = exp.getOptions()['subject']
+    parse_dir = "data/" + subject + "/session_RUN/"    
 
     # Set up scoring session
     exp.setSession("SAVE")
@@ -32,7 +34,7 @@ def save_data(exp,config):
     # get session specific configuration
     trialconfig = config.sequence(state.trial)
 
-    data_dir = "data/%s/session_SAVE/"%(exp.getOptions()['subject'])
+    data_dir = "data/%s/session_SAVE/"%subject
 
     mrk_name = data_dir + trialconfig.MARKER_FILE
     eeg_name = data_dir + trialconfig.BEHAV_FILE
@@ -46,7 +48,7 @@ def save_data(exp,config):
 
     matlab_file.write("% serial_pos\tprobe_pos\tinterference(0,1)\tdirection(0=F,1=B)\tcorrect(0,1)\tresponse time (ms)\n")
 
-    event_fields = ['subject', 'session', 'event-type', 'session-no', 'pair-no', 'stimmed', 'electrode-no', 'study-word-1', 'study-word-2', 'probe-word', 'reaction-time', 'intrusion', 'ms-time', 'ms-offset']
+    event_fields = ['subject', 'trial', 'pair', 'event-type', 'stimmed', 'electrode-no', 'study-word-1', 'study-word-2', 'probe-word', 'reaction-time', 'intrusion', 'ms-time', 'ms-offset']
 
     for field in event_fields:
         event_file.write(field +'\t')
@@ -80,15 +82,13 @@ def save_data(exp,config):
         for el in event_fields:
             towrite = None
             if el == 'subject':
-                towrite = '?'
-            elif el == 'session':
-                towrite = '?'
+                towrite = subject
             elif el == 'event-type':
                 towrite = '?'
-            elif el == 'session-no':
-                towrite = '?'
-            elif el == 'pair-no':
-                towrite = '?'
+            elif el == 'trial':
+                towrite = cur_trial
+            elif el == 'pair':
+                towrite = cur_pair
             elif el == 'stimmed':
                 towrite = '?'
             elif el == 'electrode-no':
@@ -110,7 +110,7 @@ def save_data(exp,config):
             else:
                 print 'unknown event field: ' + el
                 sys.exit(1)
-            event_file.write(towrite + '\t')
+            event_file.write(str(towrite) + '\t')
         event_file.write('\n')
 
         matlab_file.write("%d\t%d\t%d\t%d\t%d\t%d\n"%
