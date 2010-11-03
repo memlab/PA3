@@ -106,7 +106,12 @@ def extract_annotations(path):
         else:
             columns = line.split('\t')
             if len(columns) == 3:
-                words.append([round(float(columns[0])), columns[2].rstrip()])
+                stamp = round(float(columns[0]))
+                word = columns[2].rstrip()
+                if word == '<>':
+                    continue
+                else:
+                    words.append([stamp, word])
             else:
                 continue
     return words
