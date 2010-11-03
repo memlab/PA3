@@ -48,6 +48,10 @@ def save_data(exp,config):
 
     event_fields = ['subject', 'session', 'event-type', 'session-no', 'pair-no', 'stimmed', 'electrode-no', 'study-word-1', 'study-word-2', 'probe-word', 'reaction-time', 'intrusion', 'ms-time', 'ms-offset']
 
+    for field in event_fields:
+        event_file.write(field +'\t')
+    event_file.write('\n')
+
     for i in range(0, trialconfig.NUM_TRIALS * trialconfig.NUM_PAIRS):
 
         # look at ann file to determine if participant got the word right. only the first word is considered, per Mike's instructions
