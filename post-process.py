@@ -45,6 +45,9 @@ def save_data(exp,config):
     events_file = open(events_name, 'w')
 
     matlab_file.write("% serial_pos\tprobe_pos\tinterference(0,1)\tdirection(0=F,1=B)\tcorrect(0,1)\tresponse time (ms)\n")
+
+    event_fields = ['subject', 'session', 'event-type', 'session-no', 'pair-no', 'stimmed', 'electrode-no', 'study-word-1', 'study-word-2', 'probe-word', 'reaction-time', 'intrusion', 'ms-time', 'ms-offset']
+
     for i in range(0, trialconfig.NUM_TRIALS * trialconfig.NUM_PAIRS):
 
         # look at ann file to determine if participant got the word right. only the first word is considered, per Mike's instructions
@@ -68,6 +71,41 @@ def save_data(exp,config):
             correct = 0
 
         reaction_time = get_rt(cur_trial, cur_pair)
+
+
+        for el in event_fields:
+            if el == 'subject':
+                pass
+            elif el == 'session':
+                pass
+            elif el == 'event-type':
+                pass
+            elif el == 'session-no':
+                pass
+            elif el == 'pair-no':
+                pass
+            elif el == 'stimmed':
+                pass
+            elif el == 'electrode-no':
+                pass
+            elif el == 'study-word-1':
+                pass
+            elif el == 'study-word-2':
+                pass
+            elif el == 'probe-word':
+                pass
+            elif el == 'reaction-time':
+                pass
+            elif el == 'intrusion':
+                pass
+            elif el == 'ms-time':
+                pass
+            elif el == 'ms-offset':
+                pass
+            else:
+                print 'unknown event field: ' + el
+                sys.exit(1)
+        event_file.write('\n')
 
         matlab_file.write("%d\t%d\t%d\t%d\t%d\t%d\n"%
                           (state.trialData[i].presOrder,
