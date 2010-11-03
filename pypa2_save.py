@@ -50,7 +50,13 @@ def save_data(exp,config):
             print 'ann file missing: ' + ann_path
             sys.exit(1)
         spoken_words = extract_words(ann_path)
-        if spoken_words[0] == 'dunno':
+
+        direction = state.trialData[i].cueDir
+        if direction == 1:
+            opposite_direction = 0
+        else:
+            opposite_direction = 1
+        if spoken_words[0] == state.trialData[i].word[opposite_direction]:
             correct = 1
         else:
             correct = 0
