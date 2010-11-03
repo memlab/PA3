@@ -74,37 +74,39 @@ def save_data(exp,config):
 
 
         for el in event_fields:
+            towrite = None
             if el == 'subject':
-                pass
+                towrite = '?'
             elif el == 'session':
-                pass
+                towrite = '?'
             elif el == 'event-type':
-                pass
+                towrite = '?'
             elif el == 'session-no':
-                pass
+                towrite = '?'
             elif el == 'pair-no':
-                pass
+                towrite = '?'
             elif el == 'stimmed':
-                pass
+                towrite = '?'
             elif el == 'electrode-no':
-                pass
+                towrite = '?'
             elif el == 'study-word-1':
-                pass
+                towrite = '?'
             elif el == 'study-word-2':
-                pass
+                towrite = '?'
             elif el == 'probe-word':
-                pass
+                towrite = '?'
             elif el == 'reaction-time':
-                pass
+                towrite = '?'
             elif el == 'intrusion':
-                pass
+                towrite = '?'
             elif el == 'ms-time':
-                pass
+                towrite = '?'
             elif el == 'ms-offset':
-                pass
+                towrite = '?'
             else:
                 print 'unknown event field: ' + el
                 sys.exit(1)
+            event_file.write(towrite + '\t')
         event_file.write('\n')
 
         matlab_file.write("%d\t%d\t%d\t%d\t%d\t%d\n"%
