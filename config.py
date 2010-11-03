@@ -88,7 +88,7 @@ CORR_FILE="txt/wordmatrix.txt"
 POOL_FILE="txt/nounpool.txt"
 INTRO_FILE=open("txt/intro.txt").read()
 
-EXP_NAME="PYPA2"
+EXP_NAME="PYPA3"
 EXP_VERSION="v1.0"
 ORIENTING_STUDY="XXXXXX"
 ORIENTING_TEST="??????"

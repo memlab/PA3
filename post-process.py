@@ -2,7 +2,7 @@
 
 #import PyEPL symbols into this namespace:
 from pyepl.locals import *
-from pypa2 import TrialData
+from pypa3 import TrialData
 import os
 import os.path
 

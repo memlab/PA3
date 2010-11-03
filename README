@@ -42,7 +42,7 @@ has the configuration you desire.
 
 Then type,
 
-   pythonw pypa2.py -s SUBJECT_ID
+   pythonw pypa3.py -s SUBJECT_ID
 
 and enter the subject identifier in place of SUBJECT_ID. You may quit 
 the experiment between trials by pressing the ESC-F1 keys together. 
@@ -59,7 +59,7 @@ DO NOT ANNOTATE VOCALIZATIONS (e.g., "um"). Only annotate words.
 
 4. ANALYSIS
 
-  pythonw pypa2_save.py -s SUBJECT_ID
+  pythonw post-process.py -s SUBJECT_ID
 
 The behavioral results of the experiment are contained within the 
 subdat.csv file. 
