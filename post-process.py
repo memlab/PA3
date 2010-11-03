@@ -37,10 +37,12 @@ def save_data(exp,config):
     mrk_name = data_dir + trialconfig.MARKER_FILE
     eeg_name = data_dir + trialconfig.BEHAV_FILE
     matlab_name = data_dir + trialconfig.MATLAB_FILE
+    events_name = data_dir + 'events.csv'
 
     mrk_file = open(mrk_name,'w')
     eeg_file = open(eeg_name,'w')
     matlab_file = open(matlab_name,'w')
+    events_file = open(events_name, 'w')
 
     matlab_file.write("% serial_pos\tprobe_pos\tinterference(0,1)\tdirection(0=F,1=B)\tcorrect(0,1)\tresponse time (ms)\n")
     for i in range(0, trialconfig.NUM_TRIALS * trialconfig.NUM_PAIRS):
@@ -78,9 +80,9 @@ def save_data(exp,config):
     mrk_file.close()
     eeg_file.close()
     matlab_file.close()
+    events_file.close()
     video.clear("black")
-    waitForAnyKey(clock,Text("Data has been saved to\n" +
-			     "%s"%(matlab_name)))
+    waitForAnyKey(clock,Text("analyze_subject.m file:\n" + matlab_name + "\n\nevents file:\n" + events_name))
 
 
 def get_rt(trial_num, pair_num):
