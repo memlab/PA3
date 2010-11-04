@@ -95,7 +95,7 @@ def save_data(exp,config):
                 elif el == 'pair':
                     towrite = cur_pair
                 elif el == 'stimmed':
-                    towrite = pair.didStim
+                    towrite = int(pair.didStim)
                 elif el == 'electrode-no':
                     towrite = pair.elec
                 elif el == 'current':
