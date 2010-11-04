@@ -495,8 +495,8 @@ def run(exp,config,t):
 	    t.clk.delay(trialconfig.DELAY_CUE)
 	    state.trialData[index].tCue = t.clk.get()
 	    probeHandle = t.vid.showCentered(Text(probe))
-	    t.vid.updateScreen(t.clk)
-            state.trialData[pair].cueStamp = ('?sometime?', 1)
+	    stamp = t.vid.updateScreen(t.clk)
+            state.trialData[pair].cueStamp = stamp
 	    # Log the presentation of the probe
 	    t.log.logMessage("TEST_PROBE_%d\tTRIAL%d\tPROBE_%s\tEXPECTING_%s\tDIRECTION_%d"%(index,state.trial, probe, expecting, direction),stamp)
 

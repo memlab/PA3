@@ -191,7 +191,7 @@ def extract_annotations(path):
 def detect_pli(word, curPair, trialData):
     for i in range(curPair):
         if word in trialData[i].word:
-            return i
+            return curPair - i
     return -1
 
 # only do this if the experiment is run as a stand-alone program 
