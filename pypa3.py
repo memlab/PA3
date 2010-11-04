@@ -431,6 +431,10 @@ def run(exp,config,t):
             if didStim:
                 state.trialData[pair].elec = elec
                 state.trialData[pair].cur = cur
+            else:
+                state.trialData[pair].elec = 999
+                state.trialData[pair].cur = 999
+                
 
             stamp = flashStimulus(Text(text),
                                   duration=trialconfig.DURATION_WORD,
