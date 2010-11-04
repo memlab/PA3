@@ -115,7 +115,7 @@ def save_data(exp,config):
             elif el == 'ms-time':
                 towrite = '?'
             elif el == 'ms-offset':
-                towrite = '?'
+                towrite = 1
             else:
                 print 'unknown event field: ' + el
                 sys.exit(1)
