@@ -113,12 +113,12 @@ def save_data(exp,config):
                 elif el == 'reaction-time':
                     towrite = reaction_time
                 elif el == 'intrusion':
+                    towrite = '?'
+                elif el == 'ms-time':
                     if etype == 'study':
                         towrite = pair.studyStamp[0]
                     else:
                         towrite = pair.cueStamp[0]
-                elif el == 'ms-time':
-                    towrite = '?'
                 elif el == 'ms-offset':
                     if etype == 'study':
                         towrite = pair.studyStamp[1]
