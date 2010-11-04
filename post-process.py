@@ -49,7 +49,7 @@ def save_data(exp,config):
 
     matlab_file.write("% serial_pos\tprobe_pos\tinterference(0,1)\tdirection(0=F,1=B)\tcorrect(0,1)\tresponse time (ms)\n")
 
-    event_fields = ['subject', 'trial', 'pair', 'event-type', 'stimmed', 'electrode-no', 'current', 'serial-pos', 'probe-pos', 'study-word-1', 'study-word-2', 'cue-direction', 'probe-word', 'response-first-word', 'reaction-time', 'intrusion', 'ms-time', 'ms-offset']
+    event_fields = ['subject', 'trial', 'pair', 'event-type', 'stimmed', 'electrode-no', 'current', 'serial-pos', 'probe-pos', 'study-word-1', 'study-word-2', 'cue-direction', 'probe-word', 'response-first-word', 'intrusion', 'reaction-time', 'ms-time', 'ms-offset']
 
     for field in event_fields:
         event_file.write(field +'\t')
@@ -82,6 +82,12 @@ def save_data(exp,config):
         reaction_time = get_rt(cur_trial, cur_pair)
 
         pair = state.trialData[i]
+
+# %    intrusion:  -1 for extralist intrusions, 0 for correct recalls, -999
+# %                for vocalizations; positive numbers indicate prior-list
+# %                intrusions, and indicate how many lists back the intruded
+# %                word was originally studied
+
 
         for etype in ('study', 'cue'):
             for el in event_fields:
@@ -117,7 +123,10 @@ def save_data(exp,config):
                 elif el == 'reaction-time':
                     towrite = reaction_time
                 elif el == 'intrusion':
-                    towrite = '?'
+                    if correct:
+                        towrite = 0
+                    else:
+                        towrite = detect_pli(first_word)
                 elif el == 'ms-time':
                     if etype == 'study':
                         towrite = pair.studyStamp[0]
@@ -183,7 +192,9 @@ def extract_annotations(path):
                 continue
     return words
 
-    
+
+def detect_pli(word):
+    return 1
 
 # only do this if the experiment is run as a stand-alone program 
 #(not imported as a library)...
