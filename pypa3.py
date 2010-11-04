@@ -421,6 +421,16 @@ def run(exp,config,t):
                     duration = trialconfig.STUDY_STIM_DURATION
                     t.log.logMessage("BEGIN_STUDY_STIM DURATION_%d\tTRIAL_%d" % (duration, state.trial))
                     stim(duration, t.pulseControl, t.clk, trialconfig)
+                    didStim = True
+                else:
+                    didStim = False
+            else:
+                didStim = False
+
+            state.trialData[pair].didStim = didStim
+            if didStim:
+                state.trialData[pair].elec = elec
+                state.trialData[pair].cur = cur
 
             stamp = flashStimulus(Text(text),
                                   duration=trialconfig.DURATION_WORD,
