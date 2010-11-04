@@ -83,12 +83,6 @@ def save_data(exp,config):
 
         pair = state.trialData[i]
 
-# %    intrusion:  -1 for extralist intrusions, 0 for correct recalls, -999
-# %                for vocalizations; positive numbers indicate prior-list
-# %                intrusions, and indicate how many lists back the intruded
-# %                word was originally studied
-
-
         for etype in ('study', 'cue'):
             for el in event_fields:
                 towrite = None
@@ -126,7 +120,7 @@ def save_data(exp,config):
                     if correct:
                         towrite = 0
                     else:
-                        towrite = detect_pli(first_word)
+                        towrite = detect_pli(first_word, i, state.trialData)
                 elif el == 'ms-time':
                     if etype == 'study':
                         towrite = pair.studyStamp[0]
@@ -192,9 +186,13 @@ def extract_annotations(path):
                 continue
     return words
 
-
-def detect_pli(word):
-    return 1
+# <0 indicates XLI
+# >0 indicates number of *pairs* back word was seen
+def detect_pli(word, curPair, trialData):
+    for i in range(curPair):
+        if word in trialData[i].word:
+            return i
+    return -1
 
 # only do this if the experiment is run as a stand-alone program 
 #(not imported as a library)...
