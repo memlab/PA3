@@ -439,6 +439,7 @@ def run(exp,config,t):
             stamp = flashStimulus(Text(text),
                                   duration=trialconfig.DURATION_WORD,
                                   clk=t.clk)
+            state.trialData[pair].studyStamp = stamp
             # Log the presentation of each word in the pair
             t.log.logMessage("STUDY_PAIR_%d\tTRIAL_%d\tWORD1_%s\tWORD2_%s"%(pair, state.trial, word1, word2), stamp)
 
@@ -495,6 +496,7 @@ def run(exp,config,t):
 	    state.trialData[index].tCue = t.clk.get()
 	    probeHandle = t.vid.showCentered(Text(probe))
 	    t.vid.updateScreen(t.clk)
+            state.trialData[pair].cueStamp = ('?sometime?', 1)
 	    # Log the presentation of the probe
 	    t.log.logMessage("TEST_PROBE_%d\tTRIAL%d\tPROBE_%s\tEXPECTING_%s\tDIRECTION_%d"%(index,state.trial, probe, expecting, direction),stamp)
 

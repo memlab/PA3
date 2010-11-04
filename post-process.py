@@ -83,7 +83,7 @@ def save_data(exp,config):
 
         pair = state.trialData[i]
 
-        for etype in ('study', 'recall'):
+        for etype in ('study', 'cue'):
             for el in event_fields:
                 towrite = None
                 if el == 'subject':
@@ -113,11 +113,17 @@ def save_data(exp,config):
                 elif el == 'reaction-time':
                     towrite = reaction_time
                 elif el == 'intrusion':
-                    towrite = '?'
+                    if etype == 'study':
+                        towrite = pair.studyStamp[0]
+                    else:
+                        towrite = pair.cueStamp[0]
                 elif el == 'ms-time':
                     towrite = '?'
                 elif el == 'ms-offset':
-                    towrite = 1
+                    if etype == 'study':
+                        towrite = pair.studyStamp[1]
+                    else:
+                        towrite = pair.cueStamp[1]
                 else:
                     print 'unknown event field: ' + el
                     sys.exit(1)
