@@ -48,7 +48,7 @@ def save_data(exp,config):
 
     matlab_file.write("% serial_pos\tprobe_pos\tinterference(0,1)\tdirection(0=F,1=B)\tcorrect(0,1)\tresponse time (ms)\n")
 
-    event_fields = ['subject', 'trial', 'pair', 'event-type', 'stimmed', 'electrode-no', 'study-word-1', 'study-word-2', 'probe-word', 'reaction-time', 'intrusion', 'ms-time', 'ms-offset']
+    event_fields = ['subject', 'trial', 'pair', 'event-type', 'stimmed', 'electrode-no', 'study-word-1', 'study-word-2', 'cue-direction', 'probe-word', 'response-first-word', 'reaction-time', 'intrusion', 'ms-time', 'ms-offset']
 
     for field in event_fields:
         event_file.write(field +'\t')
@@ -101,6 +101,10 @@ def save_data(exp,config):
                 towrite = state.trialData[i].word[1]
             elif el == 'probe-word':
                 towrite = cue_word
+            elif el == 'cue-direction':
+                towrite = direction
+            elif el == 'response-first-word':
+                towrite = first_word
             elif el == 'reaction-time':
                 towrite = reaction_time
             elif el == 'intrusion':
