@@ -48,7 +48,7 @@ def save_data(exp,config):
 
     matlab_file.write("% serial_pos\tprobe_pos\tinterference(0,1)\tdirection(0=F,1=B)\tcorrect(0,1)\tresponse time (ms)\n")
 
-    event_fields = ['subject', 'trial', 'pair', 'event-type', 'stimmed', 'electrode-no', 'study-word-1', 'study-word-2', 'cue-direction', 'probe-word', 'response-first-word', 'reaction-time', 'intrusion', 'ms-time', 'ms-offset']
+    event_fields = ['subject', 'trial', 'pair', 'event-type', 'stimmed', 'electrode-no', 'current', 'study-word-1', 'study-word-2', 'cue-direction', 'probe-word', 'response-first-word', 'reaction-time', 'intrusion', 'ms-time', 'ms-offset']
 
     for field in event_fields:
         event_file.write(field +'\t')
@@ -80,6 +80,7 @@ def save_data(exp,config):
 
         reaction_time = get_rt(cur_trial, cur_pair)
 
+        pair = state.trialData[i]
 
         for el in event_fields:
             towrite = None
@@ -92,13 +93,15 @@ def save_data(exp,config):
             elif el == 'pair':
                 towrite = cur_pair
             elif el == 'stimmed':
-                towrite = '?'
+                towrite = pair.didStim
             elif el == 'electrode-no':
-                towrite = '?'
+                towrite = pair.elec
+            elif el == 'current':
+                towrite = pair.cur
             elif el == 'study-word-1':
-                towrite = state.trialData[i].word[0]
+                towrite = pair.word[0]
             elif el == 'study-word-2':
-                towrite = state.trialData[i].word[1]
+                towrite = pair.word[1]
             elif el == 'probe-word':
                 towrite = cue_word
             elif el == 'cue-direction':
@@ -120,10 +123,10 @@ def save_data(exp,config):
         event_file.write('\n')
 
         matlab_file.write("%d\t%d\t%d\t%d\t%d\t%d\n"%
-                          (state.trialData[i].presOrder,
-                           state.trialData[i].cueOrder,
-                           state.trialData[i].interference,
-                           state.trialData[i].cueDir,
+                          (pair.presOrder,
+                           pair.cueOrder,
+                           pair.interference,
+                           pair.cueDir,
                            correct,
                            reaction_time))
 
