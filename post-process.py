@@ -55,7 +55,7 @@ def save_data(exp,config):
         event_file.write(field +'\t')
     event_file.write('\n')
 
-    for i in range(0, trialconfig.NUM_TRIALS * trialconfig.NUM_PAIRS):
+    for i in range(0, state.trial * trialconfig.NUM_PAIRS):
 
         # look at ann file to determine if participant got the word right. only the first word is considered, per Mike's instructions
         cur_trial = i // trialconfig.NUM_PAIRS
