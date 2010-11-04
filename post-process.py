@@ -83,45 +83,46 @@ def save_data(exp,config):
 
         pair = state.trialData[i]
 
-        for el in event_fields:
-            towrite = None
-            if el == 'subject':
-                towrite = subject
-            elif el == 'event-type':
-                towrite = '?'
-            elif el == 'trial':
-                towrite = cur_trial
-            elif el == 'pair':
-                towrite = cur_pair
-            elif el == 'stimmed':
-                towrite = pair.didStim
-            elif el == 'electrode-no':
-                towrite = pair.elec
-            elif el == 'current':
-                towrite = pair.cur
-            elif el == 'study-word-1':
-                towrite = pair.word[0]
-            elif el == 'study-word-2':
-                towrite = pair.word[1]
-            elif el == 'probe-word':
-                towrite = cue_word
-            elif el == 'cue-direction':
-                towrite = direction
-            elif el == 'response-first-word':
-                towrite = first_word
-            elif el == 'reaction-time':
-                towrite = reaction_time
-            elif el == 'intrusion':
-                towrite = '?'
-            elif el == 'ms-time':
-                towrite = '?'
-            elif el == 'ms-offset':
-                towrite = 1
-            else:
-                print 'unknown event field: ' + el
-                sys.exit(1)
-            event_file.write(str(towrite) + '\t')
-        event_file.write('\n')
+        for etype in ('study', 'recall'):
+            for el in event_fields:
+                towrite = None
+                if el == 'subject':
+                    towrite = subject
+                elif el == 'event-type':
+                    towrite = etype
+                elif el == 'trial':
+                    towrite = cur_trial
+                elif el == 'pair':
+                    towrite = cur_pair
+                elif el == 'stimmed':
+                    towrite = pair.didStim
+                elif el == 'electrode-no':
+                    towrite = pair.elec
+                elif el == 'current':
+                    towrite = pair.cur
+                elif el == 'study-word-1':
+                    towrite = pair.word[0]
+                elif el == 'study-word-2':
+                    towrite = pair.word[1]
+                elif el == 'probe-word':
+                    towrite = cue_word
+                elif el == 'cue-direction':
+                    towrite = direction
+                elif el == 'response-first-word':
+                    towrite = first_word
+                elif el == 'reaction-time':
+                    towrite = reaction_time
+                elif el == 'intrusion':
+                    towrite = '?'
+                elif el == 'ms-time':
+                    towrite = '?'
+                elif el == 'ms-offset':
+                    towrite = 1
+                else:
+                    print 'unknown event field: ' + el
+                    sys.exit(1)
+                event_file.write(str(towrite) + '\t')
+            event_file.write('\n')
 
         matlab_file.write("%d\t%d\t%d\t%d\t%d\t%d\n"%
                           (pair.presOrder,
