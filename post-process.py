@@ -1,4 +1,5 @@
 #!/usr/bin/python
+from __future__ import with_statement
 
 #import PyEPL symbols into this namespace:
 from pyepl.locals import *
