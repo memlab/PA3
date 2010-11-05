@@ -562,14 +562,14 @@ def stimOnOff(log, pulseControl, clock, config, tdata):
     for i in range(config.PULSE_CYCLES):
         log.logMessage("PULSE_CYCLE_START", clock)
         stim(config.CYCLE_PULSE_ON_DURATION, pulseControl, clock, config)
-        tdata.backgroundPulses.append['background']
+        tdata.backgroundPulses.append('background')
         flashStimulus(Text("Background stim #" + str(i)), duration=config.CYCLE_PULSE_ON_DURATION + config.CYCLE_PULSE_OFF_DURATION)
 
 def sync(log, pulseControl, clock, config, tdata):
     log.logMessage("START_SYNC_STIMS_AFTER")
     for i in range(config.SYNC_DURATION_SECONDS):
         stim(10, pulseControl, clock, config, notStimmingAHuman=True)
-        tdata.backgroundPulses.append['sync']
+        tdata.backgroundPulses.append('sync')
         flashStimulus(Text(str(config.SYNC_DURATION_SECONDS - i)), duration=1000, jitter=config.JITTER)
 
 
