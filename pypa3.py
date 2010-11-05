@@ -384,7 +384,7 @@ def run(exp,config,t):
             t.log.logMessage("TRIAL_%d CURRENT_%s" % (state.trial, cur), t.clk)
 
             waitForAnyKey(t.clk, Text("Please plug into STIMULATOR.\n\nThen press any key."))
-            stimOnOff(t.log, t.pulseControl, t.clk, config, state.trialData[state.trial * trialconfig.NUM_PAIRS])
+            stimOnOff(t.log, t.pulseControl, t.clk, config, state.trialData[state.trial * trialconfig.NUM_PAIRS], elec, cur)
 
 
         waitForAnyKey(t.clk, Text("Press any key to start trial."))
@@ -557,19 +557,19 @@ def stim(duration, pulseControl, clock, config, notStimmingAHuman=False):
     pulseControl.maxPulses = (duration / pulseControl.pulseLen) / 2
     pulseControl.startPulses(clock)
 
-def stimOnOff(log, pulseControl, clock, config, tdata):
+def stimOnOff(log, pulseControl, clock, config, tdata, elec, cur):
     flashStimulus(Text("Starting test stim cycle"), duration=3000)
     for i in range(config.PULSE_CYCLES):
         log.logMessage("PULSE_CYCLE_START", clock)
         stim(config.CYCLE_PULSE_ON_DURATION, pulseControl, clock, config)
-        tdata.backgroundPulses.append('background')
+        tdata.backgroundPulses.append([timing.now(), elec, cur])
         flashStimulus(Text("Background stim #" + str(i)), duration=config.CYCLE_PULSE_ON_DURATION + config.CYCLE_PULSE_OFF_DURATION)
 
 def sync(log, pulseControl, clock, config, tdata):
     log.logMessage("START_SYNC_STIMS_AFTER")
     for i in range(config.SYNC_DURATION_SECONDS):
         stim(10, pulseControl, clock, config, notStimmingAHuman=True)
-        tdata.backgroundPulses.append('sync')
+        tdata.backgroundPulses.append(timing.now())
         flashStimulus(Text(str(config.SYNC_DURATION_SECONDS - i)), duration=1000, jitter=config.JITTER)
 
 
