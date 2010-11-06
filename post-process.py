@@ -125,12 +125,14 @@ def save_data(exp,config):
                     if etype == 'study':
                         towrite = pair.studyStamp[0]
                     else:
-                        towrite = pair.cueStamp[0]
+                        towrite = '?'
+#                        towrite = pair.cueStamp[0]
                 elif el == 'ms-offset':
                     if etype == 'study':
                         towrite = pair.studyStamp[1]
                     else:
-                        towrite = pair.cueStamp[1]
+                        towrite = '?'
+#                        towrite = pair.cueStamp[1]
                 else:
                     print 'unknown event field: ' + el
                     sys.exit(1)
