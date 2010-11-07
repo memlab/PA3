@@ -83,13 +83,23 @@ def save_data(exp,config):
 
         pair = state.trialData[i]
 
-        for etype in ('study', 'cue'):
+
+#        sync_events = [['sync', x] for x in pair.syncPulses]
+        back_events = [['pulse', x] for x in pair.backgroundPulses]
+
+
+        for etype in ['study', 'cue'] + back_events:
             for el in event_fields:
                 towrite = None
                 if el == 'subject':
                     towrite = subject
                 elif el == 'event-type':
-                    towrite = etype
+                    if etype == 'study':
+                        towrite = etype
+                    elif etype == 'cue':
+                        towrite = etype
+                    else:
+                        towrite = etype[0]
                 elif el == 'trial':
                     towrite = cur_trial
                 elif el == 'pair':
@@ -124,15 +134,20 @@ def save_data(exp,config):
                 elif el == 'ms-time':
                     if etype == 'study':
                         towrite = pair.studyStamp[0]
-                    else:
+                    elif etype == 'cue':
                         towrite = '?'
 #                        towrite = pair.cueStamp[0]
-                elif el == 'ms-offset':
-                    if etype == 'study':
-                        towrite = pair.studyStamp[1]
                     else:
-                        towrite = '?'
-#                        towrite = pair.cueStamp[1]
+                        towrite = etype[1]
+                elif el == 'ms-offset':
+                    towrite = 1
+#                     if etype == 'study':
+#                         towrite = pair.studyStamp[1]
+#                     elif etype == 'cue':
+#                         towrite = '?'
+# #                        towrite = pair.cueStamp[1]
+#                     else:
+#                         towrite = etype[1]
                 else:
                     print 'unknown event field: ' + el
                     sys.exit(1)
