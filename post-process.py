@@ -84,11 +84,11 @@ def save_data(exp,config):
         pair = state.trialData[i]
 
 
-#        sync_events = [['sync', x] for x in pair.syncPulses]
-        back_events = [['pulse', x] for x in pair.backgroundPulses]
+        sync_events = [['sync', x] for x in pair.syncPulses]
+        back_events = [['background', x] for x in pair.backgroundPulses]
 
 
-        for etype in ['study', 'cue'] + back_events:
+        for etype in ['study', 'cue'] + back_events + sync_events:
             for el in event_fields:
                 towrite = None
                 if el == 'subject':
