@@ -569,7 +569,7 @@ def sync(log, pulseControl, clock, config, tdata):
     log.logMessage("START_SYNC_STIMS_AFTER")
     for i in range(config.SYNC_DURATION_SECONDS):
         stim(10, pulseControl, clock, config, notStimmingAHuman=True)
-        tdata.backgroundPulses.append(timing.now())
+        tdata.syncPulses.append(timing.now())
         flashStimulus(Text(str(config.SYNC_DURATION_SECONDS - i)), duration=1000, jitter=config.JITTER)
 
 
