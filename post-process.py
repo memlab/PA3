@@ -137,6 +137,8 @@ def save_data(exp,config):
                     elif etype == 'cue':
                         towrite = '?'
 #                        towrite = pair.cueStamp[0]
+                    elif etype == 'background':
+                        towrite = etype[1][0]
                     else:
                         towrite = etype[1]
                 elif el == 'ms-offset':
