@@ -135,8 +135,7 @@ def save_data(exp,config):
                     if etype == 'study':
                         towrite = pair.studyStamp[0]
                     elif etype == 'cue':
-                        towrite = '?'
-#                        towrite = pair.cueStamp[0]
+                        towrite = pair.cueStamp[0]
                     elif etype[0] == 'background':
                         towrite = etype[1][0]
                     else:
