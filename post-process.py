@@ -186,7 +186,7 @@ def get_rt(trial_num, pair_num):
 def extract_annotations(path):
     words = []
     lines = open(path, 'r').readlines()
-    for line in lines:
+    for i, line in enumerate(lines):
         if line == None:
             continue
         elif line.startswith('#'):
@@ -196,7 +196,7 @@ def extract_annotations(path):
             if len(columns) == 3:
                 stamp = round(float(columns[0]))
                 word = columns[2].rstrip()
-                if word == '<>':
+                if (word == '<>') and (i < len(lines) - 1):
                     continue
                 else:
                     words.append([stamp, word])
