@@ -169,7 +169,7 @@ def load_correlation(FILE_NAME):
 
 
 
-def prepare(exp,config):
+def prepare(exp,config,sess):
     """
     This function will create the trial structure for the entire experiment.
     """
@@ -327,10 +327,10 @@ def prepare(exp,config):
 	    pool_used[wordTwo] = 1
 
 
-    exp.saveState(None,trialData=trialData,trial=0,scoreTrial=0)
+    exp.saveState(None,trialData=trialData,trial=0,scoreTrial=0,session=sess)
 	
 
-def run(exp,config,t):
+def run(exp,config):
     """
     Runs through the experiment trial-by-trial.
     """
@@ -341,13 +341,19 @@ def run(exp,config,t):
     target = Text('*')
 
     # set up session...
-    if state.trial >= len(state.trialData):
-        # if all the sessions have been run, don't continue
-        print "No more sessions!"
-        return
+    print state.trial
+    print config.NUM_TRIALS
+    print state.session
+    if state.trial >= config.NUM_TRIALS:
+        # if all the trials have been run, make a new session
+        prepare(exp,config,state.session + 1)
+        state = exp.restoreState()
 
     # set the session number (so PyEPL knows what directory to put the data in)
-    exp.setSession("RUN")#state.trial)
+    exp.setSession(str(state.session) + "_RUN")#state.trial)
+    
+    # initialize the tracks
+    t = Tracks(config)
 
     # get session specific configuration
     trialconfig = config.sequence(state.trial)
@@ -469,9 +475,9 @@ def run(exp,config,t):
 #             print "trial " + str(state.trial) + " cue: " + probe
 
 	    # create the filename for output
-	    fname = "session_RUN/%d_%d"%(state.trial,pair)
+	    fname = "%d_%d"%(state.trial,pair)
 
-            lstname = "data/" + str(exp.options["subject"]) + "/session_RUN/" + str(state.trial) + '_' + str(pair) + '.lst'
+            lstname = "data/" + str(exp.options["subject"]) + "/session_" + str(state.session) + "_RUN/" + str(state.trial) + '_' + str(pair) + '.lst'
             lst = open(lstname, 'w')
             if direction == 1:
                 opposite_direction = 0
@@ -482,8 +488,6 @@ def run(exp,config,t):
             lst.close()
 
     
-
-	       
 	    # present the orienting stimulus
 	    t.clk.delay(trialconfig.DELAY_ORIENT)
 	    stamp = flashStimulus(Text(trialconfig.ORIENTING_TEST),
@@ -657,12 +661,12 @@ if __name__ == "__main__":
     # get the subject configuration
     config = exp.getConfig()
 
-    t = Tracks(config)
+#    t = Tracks(config)
 
     # if there was no saved state, run the prepare function
     if not exp.restoreState():
-        prepare(exp, config)
+        prepare(exp, config, 0)
 
     lastStimEnd = 0 # safety variable
     # now run the subject
-    run(exp, config, t)
+    run(exp, config)
