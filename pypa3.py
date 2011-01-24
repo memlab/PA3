@@ -3,6 +3,7 @@
 #standard imports
 import sys
 import random
+import shutil
 
 #import PyEPL symbols into this namespace:
 from pyepl.locals import *
@@ -225,6 +226,8 @@ def prepare(exp,config,sess):
 
     # Load the word pool
     text_pool = TextPool(config.POOL_FILE)
+    shutil.copy(config.POOL_FILE,exp.session.fullPath())
+    print exp.session.fullPath()
 
     # Tracks which words from the pool have already been used.
     pool_used = []
@@ -393,7 +396,7 @@ def run(exp,config):
             stimOnOff(t.log, t.pulseControl, t.clk, config, state.trialData[state.trial * trialconfig.NUM_PAIRS], elec, cur)
 
 
-        waitForAnyKey(t.clk, Text("Press any key to start trial."))
+        waitForAnyKey(t.clk, Text("Press any key to start trial %d." % (state.trial + 1)))
         flashStimulus(Text(""), duration=config.AFTER_STIM_QUESTION)
 
         ####### STUDY ######
@@ -650,7 +653,7 @@ class Tracks:
 #(not imported as a library)...
 if __name__ == "__main__":
     # set up the experiment...
-    exp = Experiment()
+    exp = Experiment(use_eeg=False)
     exp.parseArgs()
     exp.setup()
 
