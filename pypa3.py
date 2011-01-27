@@ -8,7 +8,7 @@ import shutil
 #import PyEPL symbols into this namespace:
 from pyepl.locals import *
 from pyepl import display
-from pyepl.hardware import addPollCallback
+from pyepl.hardware import addPollCallback, removePollCallback
 
 
 
@@ -74,9 +74,6 @@ class PulseThread:
             if self.pulseCount == self.maxPulses:
                 self.sendPulse = False
                 self.pulseCount = 0
-
-
-
 
 
 class TrialData:
@@ -368,24 +365,40 @@ def run(exp,config):
         print "mic not working"
         return
 
+    stimSess = waitForYKey("Is this a stim session?\nPress 'y' for yes, any other key for no.")
+    if stimSess:
+        msg = 'This is a stim session.\n  Pulses will NOT be sent throughout.'
+    else:
+        msg = 'This is not a stim session.\n  Pulses will be sent throughout.'
+    flashStimulus(Text(msg), duration=config.CONFIRMATION_DURATION)
+    if not stimSess:
+        stimTrial = False
+        doSync = False
+        removePollCallback(t.pulseControl.EEGpulseCallback)
+        t.eeg.startLogging()
+        addPollCallback(t.eeg.pulseCallback)
+
     # present the instructions
     t.vid.clear('black')
     instruct(trialconfig.INTRO_FILE,clk=t.clk)
 
     while (state.trial < trialconfig.NUM_TRIALS):
-#         print
-        stimTrial = waitForYKey("Is this a stim trial?\nPress 'y' for yes, any other key for no.")
+        print stimSess
+        if stimSess:
+            stimTrial = waitForYKey("Is this a stim trial?\nPress 'y' for yes, any other key for no.")
         if stimTrial:
             msg = "Okay this IS a stim trial"
         else:
             msg = "Okay this is NOT a stim trial"
         flashStimulus(Text(msg), duration=config.CONFIRMATION_DURATION)
         t.log.logMessage("TRIAL_%d STIM_%s"%(state.trial, str(stimTrial)),t.clk)
-
-        doSync = waitForYKey("Would you like to sync?\nPress 'y' for yes, any other key for no.")
+        
+        if stimSess:
+            doSync = waitForYKey("Would you like to sync?\nPress 'y' for yes, any other key for no.")
         if doSync:
             waitForAnyKey(t.clk, Text("Please plug into EEG RIG.\n\nThen press any key to continue"))
-            sync(t.log, t.pulseControl, t.clk, config, state.trialData[state.trial * trialconfig.NUM_PAIRS])
+#            sync(t.log, t.pulseControl, t.clk, config, state.trialData[state.trial * trialconfig.NUM_PAIRS])
+            sync(t.log, t.eeg, t.clk, config)
         if stimTrial:
             elec = textInput("Electrodes: ", t.vid, t.key, t.clk)
             t.log.logMessage("TRIAL_%d ELECTRODES_%s" % (state.trial, elec), t.clk)
@@ -572,12 +585,26 @@ def stimOnOff(log, pulseControl, clock, config, tdata, elec, cur):
         tdata.backgroundPulses.append([timing.now(), elec, cur])
         flashStimulus(Text("Background stim #" + str(i)), duration=config.CYCLE_PULSE_ON_DURATION + config.CYCLE_PULSE_OFF_DURATION)
 
-def sync(log, pulseControl, clock, config, tdata):
-    log.logMessage("START_SYNC_STIMS_AFTER")
-    for i in range(config.SYNC_DURATION_SECONDS):
-        stim(10, pulseControl, clock, config, notStimmingAHuman=True)
-        tdata.syncPulses.append(timing.now())
-        flashStimulus(Text(str(config.SYNC_DURATION_SECONDS - i)), duration=1000, jitter=config.JITTER)
+def sync(log, eeg, clock, config):
+    log.logMessage("SYNCING")
+
+    i = 0
+    last_align = timing.now()
+    align_interval = 1000;
+    while i < config.NUM_SYNC_PULSE:
+        minInterPulsetime=750
+        maxInterPulseTime=1250
+        pulseLen=10 #in milliseconds                                                                                    
+        if timing.now() >= last_align + align_interval:
+            timeInterval = eeg.timedPulse(pulseLen)
+            flashStimulus(Text("sync " + str(i)), duration=750)
+            # randomize the alignment interval                                                                          
+            align_interval = random.uniform(minInterPulsetime, maxInterPulseTime)
+
+            # update last_align                                                                                         
+            last_align = timeInterval[0]
+            i += 1
+
 
 
 def waitForYKey(msg):
