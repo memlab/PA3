@@ -22,7 +22,8 @@ CYCLE_PULSE_OFF_DURATION = 10000
 PULSE_CYCLES = 10
 #frequency of pulse for stimulating study/cue, and background data. measured in number of pulses per second.
 #PyFR_Stim - 100
-STIM_PULSE_FREQ = 100
+STIM_PULSE_FREQ = 20
+NUM_SYNC_PULSE = 60
 
 STOP_BEEP_FREQ=400
 STOP_BEEP_DUR=300
@@ -37,7 +38,7 @@ JITTER=75	        # (+/- jitter) introduced to presentation timing
 NUM_PAIRS=4	        # number of pairs in each list (must be even)
 
 NUM_TRIALS=25           # number of trials total (must be odd)
-NUM_TRIALS=1         # number of trials total (must be odd)
+#NUM_TRIALS=1         # number of trials total (must be odd)
 
 MIN_SPACING=2 	        # min # of items between study and test. 
 			# must be less than half of NUM_PAIRS
