@@ -18,10 +18,11 @@ def save_data(exp,config):
     global parse_dir
     global subject
     subject = exp.getOptions()['subject']
-    parse_dir = "data/" + subject + "/session_RUN/"    
+    # parse_dir = "data/" + subject + "/session_RUN/"    
+    parse_dir = "data/" + subject + "/session_" + str(state.session) + "_RUN/"
 
     # Set up scoring session
-    exp.setSession("SAVE")
+    exp.setSession(str(state.session)+"_SAVE")
 
     # create tracks...
     video = VideoTrack("save_video")
@@ -35,7 +36,7 @@ def save_data(exp,config):
     # get session specific configuration
     trialconfig = config.sequence(state.trial)
 
-    data_dir = "data/%s/session_SAVE/"%subject
+    data_dir = "data/%s/session_%d_SAVE/" % (subject, state.session)
 
     mrk_name = data_dir + trialconfig.MARKER_FILE
     eeg_name = data_dir + trialconfig.BEHAV_FILE
@@ -60,7 +61,7 @@ def save_data(exp,config):
         # look at ann file to determine if participant got the word right. only the first word is considered, per Mike's instructions
         cur_trial = i // trialconfig.NUM_PAIRS
         cur_pair = i % trialconfig.NUM_PAIRS
-        ann_path = 'data/%s/session_RUN/%d_%d.ann' % (exp.getOptions()['subject'], cur_trial, cur_pair)
+        ann_path = 'data/%s/session_%d_RUN/%d_%d.ann' % (exp.getOptions()['subject'], state.session,cur_trial, cur_pair)
         if not os.path.exists(ann_path):
             print 'ann file missing: ' + ann_path
             sys.exit(1)
