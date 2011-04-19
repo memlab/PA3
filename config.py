@@ -17,12 +17,12 @@ CUE_STIM_DURATION=3000
 CYCLE_PULSE_ON_DURATION = 2000
 #how long should the mini-pulses go off for in the 10 x 2 on 10 off cycle
 #Brad - 10000
-CYCLE_PULSE_OFF_DURATION = 10000
+CYCLE_PULSE_OFF_DURATION = 5000
 #number of such cycles
-PULSE_CYCLES = 10
+PULSE_CYCLES = 2 #2
 #frequency of pulse for stimulating study/cue, and background data. measured in number of pulses per second.
 #PyFR_Stim - 100
-STIM_PULSE_FREQ = 20
+STIM_PULSE_FREQ = 30
 NUM_SYNC_PULSE = 60
 
 STOP_BEEP_FREQ=400
@@ -38,7 +38,7 @@ JITTER=75	        # (+/- jitter) introduced to presentation timing
 NUM_PAIRS=4	        # number of pairs in each list (must be even)
 
 NUM_TRIALS=25           # number of trials total (must be odd)
-#NUM_TRIALS=1         # number of trials total (must be odd)
+NUM_TRIALS=1         # number of trials total (must be odd)
 
 MIN_SPACING=2 	        # min # of items between study and test. 
 			# must be less than half of NUM_PAIRS
