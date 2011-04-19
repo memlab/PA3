@@ -38,7 +38,7 @@ JITTER=75	        # (+/- jitter) introduced to presentation timing
 NUM_PAIRS=4	        # number of pairs in each list (must be even)
 
 NUM_TRIALS=25           # number of trials total (must be odd)
-NUM_TRIALS=1         # number of trials total (must be odd)
+#NUM_TRIALS=1         # number of trials total (must be odd)
 
 MIN_SPACING=2 	        # min # of items between study and test. 
 			# must be less than half of NUM_PAIRS
