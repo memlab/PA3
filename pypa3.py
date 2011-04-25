@@ -452,6 +452,7 @@ def run(exp,config):
                 didStim = False
 
             state.trialData[pair].didStim = didStim
+
             if stimTrial:
                 state.trialData[pair].elec = elec
                 state.trialData[pair].cur = cur

@@ -22,7 +22,8 @@ CYCLE_PULSE_OFF_DURATION = 5000
 PULSE_CYCLES = 2 #2
 #frequency of pulse for stimulating study/cue, and background data. measured in number of pulses per second.
 #PyFR_Stim - 100
-STIM_PULSE_FREQ = 30
+STIM_PULSE_FREQ = 20
+
 NUM_SYNC_PULSE = 60
 
 STOP_BEEP_FREQ=400
