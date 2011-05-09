@@ -506,7 +506,9 @@ def run(exp,config):
 
     
 	    # present the orienting stimulus
-	    t.clk.delay(trialconfig.DELAY_ORIENT)
+            if test == 0:
+                t.clk.delay(trialconfig.DELAY_ORIENT)
+            
 	    stamp = flashStimulus(Text(trialconfig.ORIENTING_TEST),
 				  duration=trialconfig.DURATION_ORIENT,
 				  clk=t.clk)
@@ -553,6 +555,10 @@ def run(exp,config):
 
 	    (rec,timestamp) = t.aud.stopRecording(t.clk)
 	    t.log.logMessage("REC_END"%(),timestamp)
+
+	    # present the orienting stimulus
+            if test != 0:
+                t.clk.delay(trialconfig.DELAY_ORIENT)
 
 	# Save the State
 	exp.saveState(state,trial=state.trial+1)

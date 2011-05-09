@@ -58,14 +58,14 @@ DURATION_CUE=3000	# PA3: KEEP THIS THE SAME AS RECORD_LEN & CUE_STIM_DURATION
                         # the the probe should be left on until the 
                         # subject makes a response)
 
-RECORD_LEN=DURATION_CUE # PA3: KEEP THIS THE SAME AS DURATION_CUE
-                        # length of time to record subjects response 
-                        # (zero indicates record until button is pressed)
-
 
 # all timing values are in milliseconds
 DELAY_ORIENT=1500	# delay before the orienting stimulus (also 
                         #the delay after presentation of a word pair)
+
+RECORD_LEN=DURATION_CUE + DELAY_ORIENT # PA3: KEEP THIS THE SAME AS DURATION_CUE
+                        # length of time to record subjects response 
+                        # (zero indicates record until button is pressed)
 
 DURATION_ORIENT=300	# duration of the orienting stimulus
 
