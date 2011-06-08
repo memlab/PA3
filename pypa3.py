@@ -479,8 +479,10 @@ def run(exp,config):
 
 	    # first find the index of the word to be tested
 	    index = -1
-	    for i in range (state.trial*trialconfig.NUM_PAIRS,
+            all_words = []
+ 	    for i in range (state.trial*trialconfig.NUM_PAIRS,
 			    (state.trial+1)*trialconfig.NUM_PAIRS):
+                all_words.extend(state.trialData[i].word)
 		if(state.trialData[i].cueOrder == test):
 		    index = i
 		    pair = index % trialconfig.NUM_PAIRS
@@ -501,7 +503,7 @@ def run(exp,config):
             else:
                 opposite_direction = 1
             expecting = state.trialData[index].word[opposite_direction]
-            lst.write(str(expecting) + '\n') 
+            lst.writelines("\n".join(all_words))
             lst.close()
 
     
